@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <h5><span id="logged-in"></span></h5>
+    <button class="btn" onclick="logout()">Log ut</button>
+    <a class="btn-floating btn-large waves-effect waves-light success btn-add"><i class="material-icons">+</i></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD81EtdnxKg8C2-1VhVB7QQCbps9mBYgFY",
+        authDomain: "spelkollen-ea7cc.firebaseapp.com",
+        databaseURL: "https://spelkollen-ea7cc.firebaseio.com",
+        projectId: "spelkollen-ea7cc",
+        storageBucket: "spelkollen-ea7cc.appspot.com",
+        messagingSenderId: "744517835900"
+    };
+    firebase.initializeApp(config);
+
+    function logout() {
+        firebase.auth().signOut();
+        window.location = 'index.html';
+    }
+</script>
+
+</html>
