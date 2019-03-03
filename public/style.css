@@ -39,6 +39,11 @@ body>.container {
     margin-left: -30%;
 }
 
+.card-image svg {
+    width: 200px;
+    height: 200px;
+}
+
 #toast-container {
     min-width: 10%;
     bottom: 3%;
@@ -54,4 +59,60 @@ body>.container {
     position: fixed;
     top: 90%;
     left: 80%;
+}
+
+#dropdown1 {
+    margin-top: 35px;
+}
+
+#userPhoto {
+    width: 40px;
+    margin-top: 4px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.button-add {
+    position: fixed;
+    top: 90%;
+    left: 83%;
+}
+
+.card {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.card .card-content {
+    padding: 15px;
+}
+
+.card .card-action {
+    padding: 5px;
+    text-align: right;
+}
+
+.card-action-icon {
+    cursor: pointer;
+    color: #2196F3;
+}
+
+.tabs .tab a:focus.active {
+    background-color: transparent;
+}
+
+.tabs .tab a:hover {
+    color: #fff;
+}
+
+.tabs .tab a {
+    color: rgba(255, 255, 255, 0.719) !important;
+}
+
+.tabs .indicator {
+    background-color: #fff;
 }

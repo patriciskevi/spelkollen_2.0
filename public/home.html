@@ -7,29 +7,122 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <title>Home</title>
 </head>
 
 <body>
-    <h4><span id="userName"></span></h4>
-    <div><img id="userPhoto" src="" alt=""></div>
-    <button class="btn" onclick="logout()">logga ut</button>
+    <!-- NAVBAR -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!" onclick="logout()">Logga ut</a></li>
+    </ul>
+    <nav class="nav-extended">
+        <ul id="nav-mobile" class="tabs blue">
+            <li class="tab"><a class="active" href="#">test 1</a></li>
+            <li class="tab"><a href="#">test 2</a></li>
+            <li><a href="#"><span id="userName"></span></a></li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"><i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+        </div>
+    </nav>
+
+    <!-- <nav class="nav-extended blue">
+        <div class="nav-content">
+            <ul class="tabs tabs-transparent">
+                <li class="tab"><a class="active" href="#test1">Test 1</a></li>
+                <li class="tab"><a href="#test2">Test 2</a></li>
+                <li class="tab"><a href="#test4">Test 4</a></li>
+            </ul>
+        </div>
+    </nav> -->
+
+
+
+    <!-- ACTION BUTTON-->
+    <a class="btn-floating btn-large waves-effect waves-light button-add blue z-depth-3"><i class="material-icons">add</i></a>
+
+    <div id="card-bet"></div>
+    <!-- <div class="col s12">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>Mars 01, 2019</p>
+                    <p>Summa: 972:-</p>
+                    <p>Resultat: 0:-</p>
+                </div>
+                <div class="card-action">
+                    <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#"><i class="material-icons card-action-icon">
+                            create
+                        </i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <span>Summa: 972:-</span>
+                    <span>Resultat: 0:-</span>
+                </div>
+                <div class="card-action">
+                    <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#"><i class="material-icons card-action-icon">
+                            create
+                        </i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col s12 m7">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <span>Summa: 972:-</span>
+                    <span>Resultat: 0:-</span>
+                </div>
+                <div class="card-action">
+                    <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#"><i class="material-icons card-action-icon">
+                            create
+                        </i></a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
     <script src="app.js"></script>
     <script>
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                document.getElementById('userName').innerHTML = 'Välkommen ' + user.displayName;
+
                 document.getElementById('userPhoto').setAttribute('src', user.photoURL);
             } else {
                 window.location = 'index.html';
             }
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, {
+                hover: false
+            });
+        });
 
+        var instance = M.Tabs.init(document.querySelector('.tabs'), {});
+    </script>
 </body>
 
 

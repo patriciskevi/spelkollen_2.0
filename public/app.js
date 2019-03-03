@@ -42,3 +42,38 @@ function logout() {
     firebase.auth().signOut();
     window.location = 'index.html';
 }
+
+const bet = ['288', '968', '1458'];
+
+function renderBetCard() {
+    let date = new Date();
+    const card = document.createElement('div');
+
+    for (let i = 0; i < bet.length; i++) {
+        card.innerHTML = `
+        <div class="col s12">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <p>${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}</p>
+                    <p>Summa: ${bet[i]}</p>
+                    <p>Resultat: 0:-</p>
+                </div>
+                <div class="card-action">
+                    <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#"><i class="material-icons card-action-icon">
+                            create
+                        </i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+        `;
+        document.querySelector('#card-bet').innerHTML += card.innerHTML;
+    }
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderBetCard();
+})
