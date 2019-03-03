@@ -5,12 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Spelkollen</title>
 </head>
 
 <body>
+    <div class="container">
+        <div class="item">
+            <div class="facebook" onclick="facebookLogin()">
+                <?xml version="1.0" encoding="utf-8"?>
+                <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                <svg class="facebook-logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    x="0px" y="0px" viewBox="0 0 1000 1000" enable-background="new 0 0 1000 1000" xml:space="preserve">
+                    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+                    <g>
+                        <g>
+                            <path d="M772.2,180.4H616.7c-18.4,0-38.9,24.2-38.9,56.5v112.3h194.4v160.1H577.8V990H394.2V509.3H227.8V349.2h166.4V255c0-135.1,93.8-245,222.5-245h155.5V180.4z" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="item">
+            <div class="google" onclick="googleLogin()">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
+                    <defs>
+                        <path id="a" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />
+                    </defs>
+                    <clipPath id="b">
+                        <use xlink:href="#a" overflow="visible" />
+                    </clipPath>
+                    <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+                    <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
+                    <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
+                    <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
+                </svg>
+            </div>
+        </div>
+    </div>
 
+    <div id="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        M.toast({
+            html: 'Hur vill du logga in?',
+            displayLength: 6000
+        })
+    </script>
+    <!-- Code injected by live-server -->
+    <script type="text/javascript">
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        head.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() ==
+                            "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date()
+                                .valueOf());
+                        }
+                        head.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        } else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD81EtdnxKg8C2-1VhVB7QQCbps9mBYgFY",
+        authDomain: "spelkollen-ea7cc.firebaseapp.com",
+        databaseURL: "https://spelkollen-ea7cc.firebaseio.com",
+        projectId: "spelkollen-ea7cc",
+        storageBucket: "spelkollen-ea7cc.appspot.com",
+        messagingSenderId: "744517835900"
+    };
+    firebase.initializeApp(config);
+
+    function googleLogin() {
+        function newLogin(user) {
+            if (user) {
+                // app(user);
+                window.location = 'home.html';
+            } else {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                const auth = firebase.auth().signInWithRedirect(provider);
+            }
+        }
+
+        firebase.auth().onAuthStateChanged(newLogin);
+    }
+
+    function app(user) {
+        document.getElementById('login').innerHTML = 'Välkommen ' + user.displayName;
+    }
+
+    function logout() {
+        firebase.auth().signOut();
+    }
+</script>
 
 </html>

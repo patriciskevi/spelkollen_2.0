@@ -1,8 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body>.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-content: center;
+}
+
 .container {
     display: flex;
 }
 
-.facebook {
+.item {
     width: 50%;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.facebook {
     background-color: #DEEBF5;
+    border-right: 4px solid #fff;
+}
+
+.facebook svg {
+    width: 184%;
+    height: 100vh;
+    margin-left: -42%;
+    fill: #3F8DC7;
+}
+
+.google svg {
+    width: 190%;
+    height: 100vh;
+    margin-left: -30%;
+}
+
+#toast-container {
+    min-width: 10%;
+    bottom: 3%;
+    right: 50%;
+    transform: translateX(50%) translateY(50%);
+    -webkit-transform: translateX(50%) translateY(50%);
+    -moz-transform: translateX(50%) translateY(50%);
+    -ms-transform: translateX(50%) translateY(50%);
+    -o-transform: translateX(50%) translateY(50%);
 }
