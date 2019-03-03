@@ -9,6 +9,7 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// GOOGLE LOGIN
 function googleLogin() {
     function newLogin(user) {
         if (user) {
@@ -16,7 +17,26 @@ function googleLogin() {
             window.location = 'home.html';
         } else {
             const provider = new firebase.auth.GoogleAuthProvider();
-            const auth = firebase.auth().signInWithRedirect(provider);
+            const auth = firebase.auth().signInWithPopup(provider);
+        }
+    }
+
+    firebase.auth().onAuthStateChanged(newLogin);
+}
+
+function app(user) {
+    document.getElementById('login').innerHTML = 'Välkommen ' + user.displayName;
+}
+
+// FACEBOOK LOGIN
+function facebookLogin() {
+    function newLogin(user) {
+        if (user) {
+            // app(user);
+            window.location = 'home.html';
+        } else {
+            const provider = new firebase.auth.FacebookAuthProvider();
+            const auth = firebase.auth().signInWithPopup(provider);
         }
     }
 
