@@ -13,7 +13,6 @@ firebase.initializeApp(config);
 function googleLogin() {
     function newLogin(user) {
         if (user) {
-            // app(user);
             window.location = 'home.html';
         } else {
             const provider = new firebase.auth.GoogleAuthProvider();
@@ -24,16 +23,12 @@ function googleLogin() {
     firebase.auth().onAuthStateChanged(newLogin);
 }
 
-function app(user) {
-    document.getElementById('login').innerHTML = 'Välkommen ' + user.displayName;
-}
-
 // FACEBOOK LOGIN
 function facebookLogin() {
     function newLogin(user) {
         if (user) {
-            // app(user);
             window.location = 'home.html';
+            app(user);
         } else {
             const provider = new firebase.auth.FacebookAuthProvider();
             const auth = firebase.auth().signInWithPopup(provider);
@@ -43,6 +38,7 @@ function facebookLogin() {
     firebase.auth().onAuthStateChanged(newLogin);
 }
 
-function app(user) {
-    document.getElementById('login').innerHTML = 'Välkommen ' + user.displayName;
+function logout() {
+    firebase.auth().signOut();
+    window.location = 'index.html';
 }

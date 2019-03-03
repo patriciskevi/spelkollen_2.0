@@ -15,6 +15,7 @@ body>.container {
 }
 
 .item {
+    cursor: pointer;
     width: 50%;
     flex-grow: 1;
     overflow: hidden;
