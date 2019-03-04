@@ -1,13 +1,17 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgba(33, 149, 243, 0.10);
 }
 
 body>.container {
     width: 100vw;
     height: 100vh;
     display: flex;
-    align-content: center;
 }
 
 .container {
@@ -26,6 +30,10 @@ body>.container {
     border-right: 4px solid #fff;
 }
 
+.google {
+    background-color: #fff;
+}
+
 .facebook svg {
     width: 184%;
     height: 100vh;
@@ -37,11 +45,6 @@ body>.container {
     width: 190%;
     height: 100vh;
     margin-left: -30%;
-}
-
-.card-image svg {
-    width: 200px;
-    height: 200px;
 }
 
 #toast-container {
@@ -77,7 +80,7 @@ body>.container {
 
 .button-add {
     position: fixed;
-    top: 90%;
+    top: 84%;
     left: 83%;
 }
 
@@ -115,4 +118,35 @@ body>.container {
 
 .tabs .indicator {
     background-color: #fff;
+}
+
+.footer-navbar {
+    position: fixed;
+    bottom: 0%;
+    height: 50px;
+}
+
+
+
+.footer-navbar #nav-mobile a {
+    color: black;
+    margin-top: 10px;
+}
+
+#slack-logo {
+
+    width: 25px
+}
+
+#slack-logo {
+    margin: 0 20px;
+    padding: 5px 0;
+}
+
+
+
+@media (min-width: 700px) {
+    body>.container {
+        width: 60%;
+    }
 }

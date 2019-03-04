@@ -9,6 +9,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+
+
 // GOOGLE LOGIN
 function googleLogin() {
     function newLogin(user) {
@@ -43,21 +45,37 @@ function logout() {
     window.location = 'index.html';
 }
 
-const bet = ['288', '968', '1458'];
+
+
+let date = new Date();
+
+let bets = [];
+if (localStorage.getItem('bets') === null) {
+    bets = [];
+} else {
+    bets = JSON.parse(localStorage.getItem('bets'));
+}
+
+localStorage.setItem('bets', JSON.stringify(bets));
+// let bets = JSON.parse(localStorage.getItem('bet'));
+console.log(bets);
+
+
 
 function renderBetCard() {
-    let date = new Date();
     const card = document.createElement('div');
 
-    for (let i = 0; i < bet.length; i++) {
+    for (let i = 0; i < bets.length; i++) {
         card.innerHTML = `
         <div class="col s12">
         <div class="card horizontal">
             <div class="card-stacked">
                 <div class="card-content">
-                    <p>${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}</p>
-                    <p>Summa: ${bet[i]}</p>
-                    <p>Resultat: 0:-</p>
+                    <p><b>${bets[i].name}</b></p>
+                    <p>${bets[i].date}</p>
+                    <p>Summa: ${bets[i].sum}:-</p>
+                    <p>Vinst: ${bets[i].win}:-</p>
+                    
                 </div>
                 <div class="card-action">
                     <a href="#"><i class="material-icons card-action-icon">delete</i></a>
@@ -76,4 +94,32 @@ function renderBetCard() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderBetCard();
-})
+});
+
+
+
+
+
+// function getLocalStorage() {
+//     let bets = [];
+
+//     if (localStorage.getItem('bets') === null) {
+//         bets = [];
+//     } else {
+//         bets = JSON.parse(localStorage.getItem('bets'));
+//     }
+//     bets.forEach(bet =>
+//         this.bets.push({
+//             name: bet.name,
+//             date: `${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+//             sum: parseInt(bet.sum),
+//             win: parseInt(bet.win)
+//         })
+//     );
+
+//     localStorage.setItem('bets', JSON.stringify(bet));
+//     console.log(bets)
+// }
+
+// getLocalStorage();
+// renderBetCard();
