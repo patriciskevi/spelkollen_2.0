@@ -58,7 +58,6 @@ if (localStorage.getItem('bets') === null) {
 
 localStorage.setItem('bets', JSON.stringify(bets));
 // let bets = JSON.parse(localStorage.getItem('bet'));
-console.log(bets);
 
 
 
@@ -68,24 +67,24 @@ function renderBetCard() {
     for (let i = 0; i < bets.length; i++) {
         card.innerHTML = `
         <div class="col s12">
-        <div class="card horizontal">
-            <div class="card-stacked">
-                <div class="card-content">
-                    <p><b>${bets[i].name}</b></p>
-                    <p>${bets[i].date}</p>
-                    <p>Summa: ${bets[i].sum}:-</p>
-                    <p>Vinst: ${bets[i].win}:-</p>
-                    
-                </div>
-                <div class="card-action">
+            <div class="card horizontal"">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="circle"></span>
+                        <p><b>${bets[i].name}</b></p>
+                        <p>${bets[i].date}</p>
+                        <p>Summa: ${bets[i].sum}:-</p>
+                        <p>Vinst: ${bets[i].win}:-</p> 
+                    </div>
+                    <div class="card-action">
                     <a href="#"><i class="material-icons card-action-icon">delete</i></a>
                     <a href="#"><i class="material-icons card-action-icon">
                             create
                         </i></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         `;
         document.querySelector('#card-bet').innerHTML += card.innerHTML;
     }
@@ -96,6 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBetCard();
 });
 
+function flip() {
+    const flip = document.querySelector('.flip');
+    flip.addEventListener('click', function () {
+        flip.classList.add('slide-fwd-center');
+    });
+}
+
+// if (bets[i].win > 0) {
+//     `<span class="circle-win"></span>`
+// } else {
+//     `<span class="circle-loss"></span>`
+// }
 
 
 

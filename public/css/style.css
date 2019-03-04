@@ -94,6 +94,14 @@ body>.container {
     padding: 15px;
 }
 
+.circle {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    left: 92%;
+}
+
 .card .card-action {
     padding: 5px;
     text-align: right;
@@ -126,23 +134,9 @@ body>.container {
     height: 50px;
 }
 
-
-
 .footer-navbar #nav-mobile a {
-    color: black;
-    margin-top: 10px;
+    color: rgb(105, 105, 105);
 }
-
-#slack-logo {
-
-    width: 25px
-}
-
-#slack-logo {
-    margin: 0 20px 6px;
-}
-
-
 
 @media (min-width: 700px) {
     body>.container {
