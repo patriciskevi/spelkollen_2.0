@@ -14,42 +14,45 @@
 </head>
 
 <body>
-    <!-- HEADER NAVBAR -->
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!" onclick="logout()">Logga ut</a></li>
-    </ul>
-    <nav class="nav-extended header-navbar">
-        <ul id="nav-mobile" class="tabs blue">
-            <li class="tab"><a class="active" href="#">Pågående</a></li>
-            <li class="tab"><a href="#">Arkiv</a></li>
-            <li class="tab"><a href="#">Statistik</a></li>
-            <li><a href="#"><span id="userName"></span></a></li>
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"><i class="material-icons right">arrow_drop_down</i></a></li>
+    <div class="main">
+        <!-- HEADER NAVBAR -->
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!" onclick="logout()">Logga ut</a></li>
         </ul>
-        </div>
-    </nav>
-
-    <!-- ACTION BUTTON-->
-    <a class="btn-floating btn-large waves-effect waves-light button-add blue z-depth-3"><i class="material-icons">add</i></a>
-
-    <!-- CARD -->
-    <div id="card-bet"></div>
-
-    <!-- FOOTER NAVBAR -->
-    <nav class="footer-navbar white">
-        <div class="nav-wrapper">
-            <ul id="nav-mobile">
-                <li><a href="#"><i class="material-icons">
-                            message
-                        </i>Mede</a></li>
-                <li><a href="#"><i class="material-icons">
-                            more_horiz
-                        </i></a></li>
+        <nav class="nav-extended header-navbar">
+            <ul id="nav-mobile" class="tabs blue">
+                <li class="tab"><a class="active" href="#">Pågående</a></li>
+                <li class="tab"><a href="#">Arkiv</a></li>
+                <li class="tab"><a href="#">Statistik</a></li>
+                <li><a href="#"><span id="userName"></span></a></li>
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"><i class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
 
+        <!-- ACTION BUTTON-->
+        <a class="btn-floating btn-large waves-effect waves-light button-add blue z-depth-3 " onclick="addButton()"><i
+                class="material-icons">add</i></a>
 
+        <!-- CARD -->
+        <div id="card-bet"></div>
+
+        <!-- ADD BET CARD-->
+        <div id="add-bet"></div>
+
+        <!-- FOOTER NAVBAR -->
+        <nav class="footer-navbar white">
+            <div class="nav-wrapper">
+                <ul id="nav-mobile">
+                    <li><a href="#"><i class="material-icons">
+                                message
+                            </i></a></li>
+                    <li><a href="#"><i class="material-icons">
+                                more_horiz
+                            </i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>

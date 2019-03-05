@@ -48,18 +48,32 @@ function logout() {
 
 
 let date = new Date();
-
 let bets = [];
-if (localStorage.getItem('bets') === null) {
-    bets = [];
-} else {
-    bets = JSON.parse(localStorage.getItem('bets'));
+
+function getLocalStorage() {
+    let bets = [];
+
+    if (localStorage.getItem('bets') === null) {
+        bets = [];
+    } else {
+        bets = JSON.parse(localStorage.getItem('bets'));
+    }
+    bets.forEach(bet =>
+        bets.push({
+            name: bet.name,
+            date: bet.date,
+            sum: parseInt(bet.sum),
+            win: parseInt(bet.win)
+
+        })
+    );
+
 }
 
-localStorage.setItem('bets', JSON.stringify(bets));
-// let bets = JSON.parse(localStorage.getItem('bet'));
+function setLocalStorage() {
+    localStorage.setItem('bets', JSON.stringify(bets));
 
-
+}
 
 function renderBetCard() {
     const card = document.createElement('div');
@@ -67,7 +81,7 @@ function renderBetCard() {
     for (let i = 0; i < bets.length; i++) {
         card.innerHTML = `
         <div class="col s12">
-            <div class="card horizontal"">
+            <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="circle"></span>
@@ -78,7 +92,7 @@ function renderBetCard() {
                     </div>
                     <div class="card-action">
                     <a href="#"><i class="material-icons card-action-icon">delete</i></a>
-                    <a href="#"><i class="material-icons card-action-icon">
+                    <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
                             create
                         </i></a>
                     </div>
@@ -95,12 +109,98 @@ document.addEventListener('DOMContentLoaded', () => {
     renderBetCard();
 });
 
-function flip() {
-    const flip = document.querySelector('.flip');
-    flip.addEventListener('click', function () {
-        flip.classList.add('slide-fwd-center');
-    });
+function editCard() {
+    const card = document.createElement('div');
+    const flip = document.querySelector('.card');
+    flip.onclick = function () {
+        flip.classList.add('flip-vertical-fwd', 'card-back');
+    };
 }
+
+function renderAddBetCard() {
+    const card = document.createElement('div');
+
+    card.innerHTML = `
+    <div class="col s12">
+        <div class="card horizontal add-bet-card">
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="name" type="text" class="validate">
+                            <label for="name">Namn</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="sum" type="text" class="validate">
+                            <label for="sum">Summa</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="win" type="text" class="validate">
+                            <label for="win">Vinst</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#" onclick="betAdd()"><i class="material-icons card-action-icon">
+                    check
+                    </i></a>
+                </div>
+            </div>    
+        </div>
+    </div>    
+    `;
+    document.querySelector('#add-bet').innerHTML = card.innerHTML;
+}
+
+function addButton() {
+    const addButton = document.querySelector('.button-add');
+    const overlay = document.querySelector('.main');
+    addButton.onclick = function () {
+        addButton.onclick = renderAddBetCard();
+        overlay.classList.add('overlay');
+    };
+}
+
+
+
+
+
+
+
+
+
+function betAdd() {
+    const name = document.querySelector('#name').value;
+    const sum = document.querySelector('#sum').value;
+    const win = document.querySelector('#win').value;
+    const exit = document.querySelector('.add-bet-card');
+    const overlay = document.querySelector('.main');
+
+    bets.push({
+        name,
+        date: `${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+        sum: parseInt(sum),
+        win: parseInt(win)
+
+    });
+    console.log(bets);
+
+    exit.onclick = function () {
+        exit.parentNode.removeChild(exit);
+        overlay.classList.remove('overlay');
+        setLocalStorage();
+        renderBetCard();
+    };
+}
+
+
+
+
+
+
+
+
 
 // if (bets[i].win > 0) {
 //     `<span class="circle-win"></span>`
