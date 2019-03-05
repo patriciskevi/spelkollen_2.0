@@ -1,3 +1,5 @@
+// LOGIN
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyD81EtdnxKg8C2-1VhVB7QQCbps9mBYgFY",
@@ -45,14 +47,13 @@ function logout() {
     window.location = 'index.html';
 }
 
+// END OF LOGIN
 
 
 let date = new Date();
 let bets = [];
 
 function getLocalStorage() {
-    let bets = [];
-
     if (localStorage.getItem('bets') === null) {
         bets = [];
     } else {
@@ -64,20 +65,17 @@ function getLocalStorage() {
             date: bet.date,
             sum: parseInt(bet.sum),
             win: parseInt(bet.win)
-
         })
     );
-
 }
 
 function setLocalStorage() {
     localStorage.setItem('bets', JSON.stringify(bets));
-
 }
 
 function renderBetCard() {
     const card = document.createElement('div');
-
+    console.log(bets);
     for (let i = 0; i < bets.length; i++) {
         card.innerHTML = `
         <div class="col s12">
@@ -104,10 +102,6 @@ function renderBetCard() {
     }
 
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    renderBetCard();
-});
 
 function editCard() {
     const card = document.createElement('div');
@@ -150,7 +144,7 @@ function renderAddBetCard() {
         </div>
     </div>    
     `;
-    document.querySelector('#add-bet').innerHTML = card.innerHTML;
+    document.querySelector('#add-bet-card').innerHTML = card.innerHTML;
 }
 
 function addButton() {
@@ -158,23 +152,15 @@ function addButton() {
     const overlay = document.querySelector('.main');
     addButton.onclick = function () {
         addButton.onclick = renderAddBetCard();
-        overlay.classList.add('overlay');
+        overlay.classList.toggle('overlay');
     };
 }
-
-
-
-
-
-
-
-
 
 function betAdd() {
     const name = document.querySelector('#name').value;
     const sum = document.querySelector('#sum').value;
     const win = document.querySelector('#win').value;
-    const exit = document.querySelector('.add-bet-card');
+    const exit = document.querySelector('#add-bet-card');
     const overlay = document.querySelector('.main');
 
     bets.push({
@@ -182,19 +168,24 @@ function betAdd() {
         date: `${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         sum: parseInt(sum),
         win: parseInt(win)
-
     });
     console.log(bets);
-
     exit.onclick = function () {
         exit.parentNode.removeChild(exit);
-        overlay.classList.remove('overlay');
-        setLocalStorage();
-        renderBetCard();
+        overlay.classList.toggle('overlay');
     };
+    renderApp();
 }
 
+function renderApp() {
+    setLocalStorage();
+    renderBetCard();
+}
 
+document.addEventListener('DOMContentLoaded', () => {
+    getLocalStorage();
+    renderBetCard();
+});
 
 
 
