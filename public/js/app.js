@@ -46,7 +46,6 @@ function logout() {
     firebase.auth().signOut();
     window.location = 'index.html';
 }
-
 // END OF LOGIN
 
 
@@ -64,7 +63,8 @@ function getLocalStorage() {
             name: bet.name,
             date: bet.date,
             sum: parseInt(bet.sum),
-            win: parseInt(bet.win)
+            win: parseInt(bet.win),
+            id: parseInt(bet.id)
         })
     );
 }
@@ -89,7 +89,7 @@ function renderBetCard() {
                         <p>Vinst: ${bets[i].win}:-</p> 
                     </div>
                     <div class="card-action">
-                    <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#" onclick="betRemove(${bets.id})"><i class="material-icons card-action-icon">delete</i></a>
                     <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
                             create
                         </i></a>
@@ -104,17 +104,19 @@ function renderBetCard() {
 }
 
 function editCard() {
-    const card = document.createElement('div');
-    const flip = document.querySelector('.card');
-    flip.onclick = function () {
-        flip.classList.add('flip-vertical-fwd', 'card-back');
-    };
+    // const card = document.createElement('div');
+    // const flip = document.querySelector('.card');
+    // flip.onclick = function () {
+    //     flip.classList.add('flip-vertical-fwd', 'card-back');
+    // };
+    console.log('edit');
 }
 
 function renderAddBetCard() {
     const card = document.createElement('div');
 
     card.innerHTML = `
+    <div id="add-bet-card">
     <div class="col s12">
         <div class="card horizontal add-bet-card">
             <div class="card-stacked">
@@ -143,8 +145,9 @@ function renderAddBetCard() {
             </div>    
         </div>
     </div>    
+    </div>
     `;
-    document.querySelector('#add-bet-card').innerHTML = card.innerHTML;
+    document.querySelector('.add-bet-card').innerHTML = card.innerHTML;
 }
 
 function addButton() {
@@ -167,13 +170,22 @@ function betAdd() {
         name,
         date: `${date.getFullYear()}/${date.getMonth() +1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
         sum: parseInt(sum),
-        win: parseInt(win)
+        win: parseInt(win),
+        id: bets.length + 1
     });
     console.log(bets);
     exit.onclick = function () {
         exit.parentNode.removeChild(exit);
         overlay.classList.toggle('overlay');
     };
+    renderApp();
+}
+
+function betRemove(id) {
+    console.log(bets.id)
+    // bets = bets.filter(bet => {
+    //     return bet.id != id;
+    // });
     renderApp();
 }
 

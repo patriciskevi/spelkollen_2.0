@@ -1,128 +1,124 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: rgba(33, 149, 243, 0.10);
+  background-color: rgba(33, 149, 243, 0.1);
 }
 
-body>.container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
+body > .container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 }
 
 .container {
-    display: flex;
+  display: flex;
 }
 
 .item {
-    cursor: pointer;
-    width: 50%;
-    flex-grow: 1;
-    overflow: hidden;
+  cursor: pointer;
+  width: 50%;
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .facebook {
-    background-color: #DEEBF5;
-    border-right: 4px solid #fff;
+  background-color: #deebf5;
+  border-right: 4px solid #fff;
 }
 
 .google {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .facebook svg {
-    width: 184%;
-    height: 100vh;
-    margin-left: -42%;
-    fill: #3F8DC7;
+  width: 184%;
+  height: 100vh;
+  margin-left: -42%;
+  fill: #3f8dc7;
 }
 
 .google svg {
-    width: 190%;
-    height: 100vh;
-    margin-left: -30%;
+  width: 190%;
+  height: 100vh;
+  margin-left: -30%;
 }
 
 #toast-container {
-    min-width: 10%;
-    bottom: 3%;
-    right: 50%;
-    transform: translateX(50%) translateY(50%);
-    -webkit-transform: translateX(50%) translateY(50%);
-    -moz-transform: translateX(50%) translateY(50%);
-    -ms-transform: translateX(50%) translateY(50%);
-    -o-transform: translateX(50%) translateY(50%);
+  min-width: 10%;
+  bottom: 3%;
+  right: 50%;
+  transform: translateX(50%) translateY(50%);
+  -webkit-transform: translateX(50%) translateY(50%);
+  -moz-transform: translateX(50%) translateY(50%);
+  -ms-transform: translateX(50%) translateY(50%);
+  -o-transform: translateX(50%) translateY(50%);
 }
 
 .btn-add {
-    position: fixed;
-    top: 90%;
-    left: 80%;
+  position: fixed;
+  top: 90%;
+  left: 80%;
 }
 
 #dropdown1 {
-    margin-top: 35px;
+  margin-top: 35px;
 }
 
 #userPhoto {
-    width: 40px;
-    margin-top: 4px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+  width: 40px;
+  margin-top: 4px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
 .button-add {
-    position: fixed;
-    top: 84%;
-    left: 83%;
+  position: fixed;
+  top: 84%;
+  left: 83%;
 }
 
 .card {
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 10px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
 }
 
-.card-back {}
-
-.add-bet-card {
-    width: 70%;
-    padding: 0 15px;
-    position: absolute;
-    top: 25vh;
-    left: 15vw;
-    z-index: 30;
+.card-back {
 }
 
-.display-none {
-    display: none;
+#add-bet-card {
+  width: 80%;
+  padding: 0 15px;
+  position: absolute;
+  top: 25vh;
+  left: 10vw;
 }
 
 .overlay {
-    filter: blur(4px);
-    -webkit-filter: blur(4px);
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.8;
-    z-index: -1;
+  filter: blur(4px);
+  -webkit-filter: blur(4px);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.8;
 }
 
-
 .flip-vertical-fwd {
-    -webkit-animation: flip-vertical-fwd .4s cubic-bezier(.455, .03, .515, .955) both;
-    animation: flip-vertical-fwd .4s cubic-bezier(.455, .03, .515, .955) both;
-    -webkit-animation: flip-vertical-fwd .4s cubic-bezier(.455, .03, .515, .955) both;
-    -webkit-backface-visibility: ;
+  -webkit-animation: flip-vertical-fwd 0.4s
+    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: flip-vertical-fwd 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -webkit-animation: flip-vertical-fwd 0.4s
+    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -webkit-backface-visibility: ;
 }
 
 /* ----------------------------------------------
@@ -131,83 +127,79 @@ body>.container {
  * ---------------------------------------------- */
 
 @-webkit-keyframes flip-vertical-fwd {
-    0% {
-        -webkit-transform: translateZ(0) rotateY(0);
-        transform: translateZ(0) rotateY(0)
-    }
+  0% {
+    -webkit-transform: translateZ(0) rotateY(0);
+    transform: translateZ(0) rotateY(0);
+  }
 
-    100% {
-        -webkit-transform: translateZ(160px) rotateY(180deg);
-        transform: translateZ(160px) rotateY(180deg)
-    }
+  100% {
+    -webkit-transform: translateZ(160px) rotateY(180deg);
+    transform: translateZ(160px) rotateY(180deg);
+  }
 }
 
 @keyframes flip-vertical-fwd {
-    0% {
-        -webkit-transform: translateZ(0) rotateY(0);
-        transform: translateZ(0) rotateY(0)
-    }
+  0% {
+    -webkit-transform: translateZ(0) rotateY(0);
+    transform: translateZ(0) rotateY(0);
+  }
 
-    100% {
-        -webkit-transform: translateZ(160px) rotateY(180deg);
-        transform: translateZ(160px) rotateY(180deg)
-    }
+  100% {
+    -webkit-transform: translateZ(160px) rotateY(180deg);
+    transform: translateZ(160px) rotateY(180deg);
+  }
 }
 
 .card .card-content {
-    padding: 15px;
+  padding: 15px;
 }
 
 .circle {
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    position: absolute;
-    left: 92%;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  position: absolute;
+  left: 92%;
 }
 
 .card .card-action {
-    padding: 5px;
-    text-align: right;
+  padding: 5px;
+  text-align: right;
 }
 
 .card-action-icon {
-    cursor: pointer;
-    color: #2196F3;
+  cursor: pointer;
+  color: #2196f3;
 }
 
-
-
-
-
 .tabs .tab a:focus.active {
-    background-color: transparent;
+  background-color: transparent;
 }
 
 .tabs .tab a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 .tabs .tab a {
-    color: rgba(255, 255, 255, 0.719) !important;
+  color: rgba(255, 255, 255, 0.719) !important;
 }
 
 .tabs .indicator {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .footer-navbar {
-    position: fixed;
-    bottom: 0%;
-    height: 50px;
+  position: fixed;
+  bottom: 0%;
+  height: 50px;
 }
 
 .footer-navbar #nav-mobile a {
-    color: rgb(105, 105, 105);
+  color: rgb(105, 105, 105);
 }
 
 @media (min-width: 700px) {
-    body>.container {
-        width: 60%;
-    }
+  body > .container {
+    width: 60%;
+  }
 }
