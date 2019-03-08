@@ -24,8 +24,7 @@
                 <li class="tab"><a class="active" href="#">Pågående</a></li>
                 <li class="tab"><a href="#">Arkiv</a></li>
                 <li class="tab"><a href="#">Statistik</a></li>
-                <li><a href="#"><span id="userName"></span></a></li>
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"><i class="material-icons right">arrow_drop_down</i></a></li>
+                <li class="user-photo"><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"></a></li>
             </ul>
         </nav>
 
@@ -37,13 +36,19 @@
         <div id="card-bet"></div>
 
         <!-- FOOTER NAVBAR -->
+        <!-- Dropdown Structure -->
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li><a href="#!">three</a></li>
+        </ul>
         <nav class="footer-navbar white">
             <div class="nav-wrapper">
                 <ul id="nav-mobile">
                     <li><a href="#"><i class="material-icons">
                                 message
                             </i></a></li>
-                    <li><a href="#"><i class="material-icons">
+                    <li><a class="dropdown-trigger" data-target="dropdown2" href="#"><i class="material-icons">
                                 more_horiz
                             </i></a></li>
                 </ul>

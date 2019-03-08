@@ -67,6 +67,9 @@ body > .container {
 #dropdown1 {
   margin-top: 35px;
 }
+.user-photo {
+  margin-left: 90px;
+}
 
 #userPhoto {
   width: 40px;
