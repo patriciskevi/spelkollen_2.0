@@ -157,10 +157,10 @@ function renderAddBetCard() {
 function addButton() {
     const addButton = document.querySelector('.button-add');
     const overlay = document.querySelector('.main');
-    addButton.onclick = function () {
-        addButton.onclick = renderAddBetCard();
-        overlay.classList.toggle('overlay');
-    };
+
+    addButton.onclick = renderAddBetCard();
+    overlay.classList.toggle('overlay');
+
 }
 
 function betAdd() {
@@ -177,7 +177,6 @@ function betAdd() {
         win: parseInt(win),
         id: bets.length + 1
     });
-    console.log(bets);
     exit.onclick = function () {
         exit.parentNode.removeChild(exit);
         overlay.classList.toggle('overlay');
