@@ -154,13 +154,37 @@ function renderAddBetCard() {
     document.querySelector('.add-bet-card').innerHTML = card.innerHTML;
 }
 
+function renderPlayerCard() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        for (let player of getPlayersTotalBets()) {
+            const card = document.createElement('div'); {
+                card.innerHTML = `
+                            <div class="col s12">
+                                <div class="card horizontal">
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <img id="cardUserPhoto" src="${user.photoURL}">
+                                            <p><b>${user.displayName}</b>,</p>
+                                            <p>Du har spelat för: ${player.sum}</p>
+                                            <p>Din totala vinstsumma är: ${player.win}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                document.querySelector('#stats').innerHTML = card.innerHTML;
+            }
+        }
+    });
+
+}
+
 function addButton() {
     const addButton = document.querySelector('.button-add');
     const overlay = document.querySelector('.main');
 
     addButton.onclick = renderAddBetCard();
     overlay.classList.toggle('overlay');
-
 }
 
 function betAdd() {
@@ -191,6 +215,29 @@ function betRemove(id) {
     renderApp();
 }
 
+function getPlayersTotalBets() {
+    const players = [];
+    for (let bet of bets) {
+        const player = players.find(player => player.name === bet.name);
+        if (!player) {
+            players.push({
+                name: bet.name,
+                win: bet.win,
+                sum: bet.sum,
+                id: bet.id,
+                date: bet.date
+            });
+        } else {
+            player.win += bet.win;
+            player.sum += bet.sum;
+        }
+    }
+    return players;
+}
+
+
+
+
 function renderApp() {
     setLocalStorage();
     renderBetCard();
@@ -199,6 +246,7 @@ function renderApp() {
 document.addEventListener('DOMContentLoaded', () => {
     getLocalStorage();
     renderBetCard();
+    renderPlayerCard();
 });
 
 
