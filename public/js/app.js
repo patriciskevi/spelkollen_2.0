@@ -58,15 +58,15 @@ function getLocalStorage() {
     } else {
         bets = JSON.parse(localStorage.getItem('bets'));
     }
-    bets.forEach(bet =>
-        bets.push({
-            name: bet.name,
-            date: bet.date,
-            sum: parseInt(bet.sum),
-            win: parseInt(bet.win),
-            id: parseInt(bet.id)
-        })
-    );
+    // bets.forEach(bet =>
+    //     bets.push({
+    //         name: bet.name,
+    //         date: bet.date,
+    //         sum: parseInt(bet.sum),
+    //         win: parseInt(bet.win),
+    //         id: parseInt(bet.id)
+    //     })
+    // );
 }
 
 function setLocalStorage() {
@@ -76,20 +76,24 @@ function setLocalStorage() {
 function renderBetCard() {
     const card = document.createElement('div');
     console.log(bets);
-    for (let i = 0; i < bets.length; i++) {
+    for (let bet of bets) {
         card.innerHTML = `
         <div class="col s12">
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="circle"></span>
-                        <p><b>${bets[i].name}</b></p>
-                        <p>${bets[i].date}</p>
-                        <p>Summa: ${bets[i].sum}:-</p>
-                        <p>Vinst: ${bets[i].win}:-</p> 
+                        <p><b>${bet.name}</b></p>
+                        <p>${bet.date}</p>
+                        <p>Summa: ${bet.sum}:-</p>
+                        <p>Vinst: ${bet.win}:-</p> 
                     </div>
                     <div class="card-action">
-                    <a href="#" onclick="betRemove(${bets.id})"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#" id="${
+                        bet.id
+                      }" onclick="betRemove(${
+                        bet.id
+                      })"><i class="material-icons card-action-icon">delete</i></a>
                     <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
                             create
                         </i></a>
@@ -182,10 +186,9 @@ function betAdd() {
 }
 
 function betRemove(id) {
-    console.log(bets.id)
-    // bets = bets.filter(bet => {
-    //     return bet.id != id;
-    // });
+    bets = bets.filter(bet => {
+        return bet.id != id;
+    });
     renderApp();
 }
 

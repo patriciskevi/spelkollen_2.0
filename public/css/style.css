@@ -91,17 +91,24 @@ body > .container {
   width: 90%;
   margin: 0 auto;
   margin-top: 10px;
-}
-
-.card-back {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 #add-bet-card {
   width: 80%;
   padding: 0 15px;
+  border-radius: 4px;
   position: absolute;
   top: 25vh;
   left: 10vw;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
 }
 
 .overlay {
@@ -192,6 +199,7 @@ body > .container {
 }
 
 .footer-navbar {
+  margin-top: 120px;
   position: fixed;
   bottom: 0%;
   height: 50px;
