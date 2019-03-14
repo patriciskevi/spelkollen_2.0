@@ -74,8 +74,7 @@ function setLocalStorage() {
 }
 
 function renderBetCard() {
-    const card = document.createElement('div');
-    console.log(bets);
+    const card = document.createElement('div');;
     for (let bet of bets) {
         card.innerHTML = `
         <div class="col s12">
@@ -154,7 +153,7 @@ function renderAddBetCard() {
     document.querySelector('.add-bet-card').innerHTML = card.innerHTML;
 }
 
-function renderPlayerCard() {
+function playerCard() {
     firebase.auth().onAuthStateChanged(function (user) {
         for (let player of getPlayersTotalBets()) {
             const card = document.createElement('div'); {
@@ -176,7 +175,30 @@ function renderPlayerCard() {
             }
         }
     });
+}
 
+function totalCard() {
+    // const sum = bets.reduce(add);
+
+    // function add(accumulator, a) {
+    //     return accumulator + a;
+    // }
+    console.log(bets);
+    const card = document.createElement('div'); {
+        card.innerHTML = `
+                            <div class="col s12">
+                                <div class="card horizontal">
+                                    <div class="card-stacked">
+                                        <div class="card-content">
+                                            <p>Gruppen har spelat för:  </p>
+                                            <p>Gruppens totala vinstsumma är:  </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+        document.querySelector('#stats').innerHTML = card.innerHTML;
+    }
 }
 
 function addButton() {
@@ -206,6 +228,8 @@ function betAdd() {
         overlay.classList.toggle('overlay');
     };
     renderApp();
+    playerCard();
+    totalCard();
 }
 
 function betRemove(id) {
@@ -246,7 +270,8 @@ function renderApp() {
 document.addEventListener('DOMContentLoaded', () => {
     getLocalStorage();
     renderBetCard();
-    renderPlayerCard();
+    playerCard();
+    totalCard();
 });
 
 

@@ -98,7 +98,7 @@ body > .container {
 }
 
 .card {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   margin-top: 10px;
   border-radius: 4px;
@@ -109,12 +109,12 @@ body > .container {
 }
 
 #add-bet-card {
-  width: 80%;
+  width: 90%;
   padding: 0 15px;
   border-radius: 4px;
   position: absolute;
   top: 25vh;
-  left: 10vw;
+  left: 5vw;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
