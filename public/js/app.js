@@ -49,7 +49,6 @@ function logout() {
 // END OF LOGIN
 
 
-let date = new Date();
 let bets = [];
 
 function getLocalStorage() {
@@ -58,15 +57,6 @@ function getLocalStorage() {
     } else {
         bets = JSON.parse(localStorage.getItem('bets'));
     }
-    // bets.forEach(bet =>
-    //     bets.push({
-    //         name: bet.name,
-    //         date: bet.date,
-    //         sum: parseInt(bet.sum),
-    //         win: parseInt(bet.win),
-    //         id: parseInt(bet.id)
-    //     })
-    // );
 }
 
 function setLocalStorage() {
@@ -74,7 +64,8 @@ function setLocalStorage() {
 }
 
 function renderBetCard() {
-    const card = document.createElement('div');;
+    const card = document.createElement('div');
+    document.querySelector('#card-bet').innerHTML = '';
     for (let bet of bets) {
         card.innerHTML = `
         <div class="col s12">
@@ -116,9 +107,8 @@ function editCard() {
 }
 
 function renderAddBetCard() {
-    const card = document.createElement('div');
 
-    card.innerHTML = `
+    document.querySelector('.add-bet-card').innerHTML = `
     <div id="add-bet-card">
     <div class="col s12">
         <div class="card horizontal add-bet-card">
@@ -150,7 +140,7 @@ function renderAddBetCard() {
     </div>    
     </div>
     `;
-    document.querySelector('.add-bet-card').innerHTML = card.innerHTML;
+
 }
 
 function playerCard() {
@@ -183,7 +173,7 @@ function totalCard() {
     // function add(accumulator, a) {
     //     return accumulator + a;
     // }
-    console.log(bets);
+
     const card = document.createElement('div'); {
         card.innerHTML = `
                             <div class="col s12">
@@ -202,10 +192,10 @@ function totalCard() {
 }
 
 function addButton() {
-    const addButton = document.querySelector('.button-add');
     const overlay = document.querySelector('.main');
+    renderAddBetCard();
 
-    addButton.onclick = renderAddBetCard();
+    // addButton.onclick = renderAddBetCard();
     overlay.classList.toggle('overlay');
 }
 
@@ -215,6 +205,8 @@ function betAdd() {
     const win = document.querySelector('#win').value;
     const exit = document.querySelector('#add-bet-card');
     const overlay = document.querySelector('.main');
+
+    const date = new Date();
 
     bets.push({
         name,
@@ -264,14 +256,16 @@ function getPlayersTotalBets() {
 
 function renderApp() {
     setLocalStorage();
-    renderBetCard();
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-    getLocalStorage();
     renderBetCard();
     playerCard();
     totalCard();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    getLocalStorage();
+    renderApp();
 });
 
 
