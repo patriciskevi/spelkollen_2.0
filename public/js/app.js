@@ -73,7 +73,7 @@ function renderBetCard() {
                     <div class="card-action">
                     <a href="#"><i class="material-icons card-action-icon" id="${
                       childSnap.key
-                    }" onclick="betRemove()">delete</i></a>
+                    }" onclick="betRemove('${childSnap.key}')">delete</i></a>
                     <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
                             create
                         </i></a>
@@ -228,11 +228,8 @@ function betAdd() {
   totalCard();
 }
 
-function betRemove() {
-  const dbRefObject = firebase
-    .database()
-    .ref()
-    .child("bets");
+function betRemove(id) {
+  const dbRefObject = firebase.database().ref(`bets/${id}`);
 
   dbRefObject
     .remove()
@@ -242,11 +239,7 @@ function betRemove() {
     .catch(function(error) {
       console.log("Remove failed" + error.message);
     });
-  //   dbRefObject.on("child_removed", snap => {
-  //     const betToRemove = document.getElementById(snap.key);
-  //     betToRemove.remove();
-  //   });
-  //   console.log("delete");
+
   renderApp();
 }
 
