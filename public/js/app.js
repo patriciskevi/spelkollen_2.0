@@ -46,39 +46,34 @@ function logout() {
 }
 // END OF LOGIN
 
-let bets = [];
-
-// function getLocalStorage() {
-//   if (localStorage.getItem("bets") === null) {
-//     bets = [];
-//   } else {
-//     bets = JSON.parse(localStorage.getItem("bets"));
-//   }
-// }
-
-// function setLocalStorage() {
-//   localStorage.setItem("bets", JSON.stringify(bets));
-// }
+// let bets = [];
 
 function renderBetCard() {
-  const card = document.createElement("div");
-  document.querySelector("#card-bet").innerHTML = "";
-  for (let bet of bets) {
-    card.innerHTML = `
+  const betCard = document.querySelector("#card-bet");
+  const dbRefObject = firebase
+    .database()
+    .ref()
+    .child("bets");
+
+  dbRefObject.on("value", snap => {
+    betCard.innerHTML = "";
+    snap.forEach(childSnap => {
+      const li = document.createElement("li");
+      li.innerHTML = `
         <div class="col s12">
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
                         <span class="circle"></span>
-                        <p><b>${bet.name}</b></p>
-                        <p>${bet.date}</p>
-                        <p>Summa: ${bet.sum}:-</p>
-                        <p>Vinst: ${bet.win}:-</p> 
+                        <p><b>${childSnap.val().name}</b></p>
+                        <p>${childSnap.val().date}</p>
+                        <p>Summa: ${childSnap.val().sum}:-</p>
+                        <p>Vinst: ${childSnap.val().win}:-</p> 
                     </div>
                     <div class="card-action">
-                    <a href="#" id="${bet.id}" onclick="betRemove(${
-      bet.id
-    })"><i class="material-icons card-action-icon">delete</i></a>
+                    <a href="#"><i class="material-icons card-action-icon" id="${
+                      childSnap.key
+                    }" onclick="betRemove()">delete</i></a>
                     <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
                             create
                         </i></a>
@@ -87,8 +82,9 @@ function renderBetCard() {
             </div>
         </div>
         `;
-    document.querySelector("#card-bet").innerHTML += card.innerHTML;
-  }
+      document.querySelector("#card-bet").innerHTML += li.innerHTML;
+    });
+  });
 }
 
 function editCard() {
@@ -135,36 +131,36 @@ function renderAddBetCard() {
     `;
 }
 
-function playerCard() {
-  firebase.auth().onAuthStateChanged(function(user) {
-    for (let player of getPlayersTotalBets()) {
-      const card = document.createElement("div");
-      {
-        card.innerHTML = `
-                            <div class="col s12">
-                                <div class="card horizontal">
-                                    <div class="card-stacked">
-                                        <div class="card-content">
-                                            <img id="cardUserPhoto" src="${
-                                              user.photoURL
-                                            }">
-                                            <p><b>${user.displayName}</b>,</p>
-                                            <p>Du har spelat för: ${
-                                              player.sum
-                                            }</p>
-                                            <p>Din totala vinstsumma är: ${
-                                              player.win
-                                            }</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-        document.querySelector("#stats").innerHTML = card.innerHTML;
-      }
-    }
-  });
-}
+// function playerCard() {
+//   firebase.auth().onAuthStateChanged(function(user) {
+//     for (let player of getPlayersTotalBets()) {
+//       const card = document.createElement("div");
+//       {
+//         card.innerHTML = `
+//                             <div class="col s12">
+//                                 <div class="card horizontal">
+//                                     <div class="card-stacked">
+//                                         <div class="card-content">
+//                                             <img id="cardUserPhoto" src="${
+//                                               user.photoURL
+//                                             }">
+//                                             <p><b>${user.displayName}</b>,</p>
+//                                             <p>Du har spelat för: ${
+//                                               player.sum
+//                                             }</p>
+//                                             <p>Din totala vinstsumma är: ${
+//                                               player.win
+//                                             }</p>
+//                                         </div>
+//                                     </div>
+//                                 </div>
+//                             </div>
+//                             `;
+//         document.querySelector("#stats").innerHTML = card.innerHTML;
+//       }
+//     }
+//   });
+// }
 
 function totalCard() {
   // const sum = bets.reduce(add);
@@ -195,11 +191,11 @@ function addButton() {
   const overlay = document.querySelector(".main");
   renderAddBetCard();
 
-  // addButton.onclick = renderAddBetCard();
   overlay.classList.toggle("overlay");
 }
 
 function betAdd() {
+  // Get elements
   const name = document.querySelector("#name").value;
   const sum = document.querySelector("#sum").value;
   const win = document.querySelector("#win").value;
@@ -208,96 +204,78 @@ function betAdd() {
 
   const date = new Date();
 
-  bets.push({
-    name,
+  // Create reference
+  const dbRef = firebase.database();
+
+  // Create bet
+  const bet = {
+    name: name,
     date: `${date.getFullYear()}/${date.getMonth() +
       1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
-    sum: parseInt(sum),
-    win: parseInt(win),
-    id: bets.length + 1
-  });
+    sum: sum,
+    win: win
+  };
+
+  // Sync
+  dbRef.ref("bets").push(bet);
+
   exit.onclick = function() {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
-  renderApp();
-  playerCard();
+  //   renderApp();
+  //   playerCard();
   totalCard();
 }
 
-function betRemove(id) {
-  bets = bets.filter(bet => {
-    return bet.id != id;
-  });
+function betRemove() {
+  const dbRefObject = firebase
+    .database()
+    .ref()
+    .child("bets");
+
+  dbRefObject
+    .remove()
+    .then(() => {
+      console.log("Remove success");
+    })
+    .catch(function(error) {
+      console.log("Remove failed" + error.message);
+    });
+  //   dbRefObject.on("child_removed", snap => {
+  //     const betToRemove = document.getElementById(snap.key);
+  //     betToRemove.remove();
+  //   });
+  //   console.log("delete");
   renderApp();
 }
 
-function getPlayersTotalBets() {
-  const players = [];
-  for (let bet of bets) {
-    const player = players.find(player => player.name === bet.name);
-    if (!player) {
-      players.push({
-        name: bet.name,
-        win: bet.win,
-        sum: bet.sum,
-        id: bet.id,
-        date: bet.date
-      });
-    } else {
-      player.win += bet.win;
-      player.sum += bet.sum;
-    }
-  }
-  return players;
-}
+// function getPlayersTotalBets() {
+//   const players = [];
+//   for (let bet of bets) {
+//     const player = players.find(player => player.name === bet.name);
+//     if (!player) {
+//       players.push({
+//         name: bet.name,
+//         win: bet.win,
+//         sum: bet.sum,
+//         id: bet.id,
+//         date: bet.date
+//       });
+//     } else {
+//       player.win += bet.win;
+//       player.sum += bet.sum;
+//     }
+//   }
+//   return players;
+// }
 
 function renderApp() {
-  //   setLocalStorage();
-
   renderBetCard();
-  playerCard();
+  //   playerCard();
   totalCard();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  //   getLocalStorage();
   renderApp();
-});
-
-const ul = document.querySelector("#display-text");
-const dbRefObject = firebase
-  .database()
-  .ref()
-  .child("bets");
-
-dbRefObject.on("value", snap => {
-  ul.innerHTML = " ";
-  snap.forEach(childSnap => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-    <div class="col s12">
-        <div class="card horizontal">
-            <div class="card-stacked">
-                <div class="card-content">
-                    <span class="circle"></span>
-                    <p><b>${childSnap.val().name}</b></p>
-                    <p></p>
-                    <p>Summa: ${childSnap.val().sum}:-</p>
-                    <p>Vinst: ${childSnap.val().win}:-</p> 
-                </div>
-                <div class="card-action">
-                <a href="#" id="${childSnap.key}" onclick="betRemove(${
-      childSnap.key
-    })"><i class="material-icons card-action-icon">delete</i></a>
-                <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
-                        create
-                    </i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    `;
-    document.querySelector("#card-bet").innerHTML += li.innerHTML;
-  });
 });
