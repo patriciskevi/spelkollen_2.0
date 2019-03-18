@@ -19,7 +19,7 @@ let bets = [];
 function googleLogin() {
   function newLogin(user) {
     if (user) {
-      window.location = "home.html";
+      window.location = "home.html?w123";
     } else {
       const provider = new firebase.auth.GoogleAuthProvider();
       const auth = firebase.auth().signInWithPopup(provider);
@@ -33,7 +33,7 @@ function googleLogin() {
 function facebookLogin() {
   function newLogin(user) {
     if (user) {
-      window.location = "home.html";
+      window.location = "home.html?w123";
       app(user);
     } else {
       const provider = new firebase.auth.FacebookAuthProvider();
