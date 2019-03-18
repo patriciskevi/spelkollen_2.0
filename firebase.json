@@ -2,7 +2,7 @@
   "hosting": {
     "public": "public",
     "headers": [{
-      "source": "/service-worker.js",
+      "source": "/css/style.js",
       "headers": [{
         "key": "Cache-Control",
         "value": "no-cache"
