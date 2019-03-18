@@ -80,7 +80,8 @@ function renderBetCard() {
   betCard.innerHTML = "";
   bets.map(item => {
     const li = document.createElement("li");
-    console.log(Date.now());
+    const date = new Date(item.date * 1000);
+    console.log(date);
     li.innerHTML = `
           <div class="col s12">
               <div class="card horizontal">
@@ -88,7 +89,8 @@ function renderBetCard() {
                       <div class="card-content">
                           <span class="circle"></span>
                           <p><b>${item.name}</b></p>
-                          <p>${item.date}</p>
+                          
+                          <p>${date.getFullYear()}-${date.getMonth() +1}-${date.getDate()}</p>
                           <p>Summa: ${item.sum}:-</p>
                           <p>Vinst: ${item.win}:-</p> 
                       </div>
@@ -107,6 +109,8 @@ function renderBetCard() {
     document.querySelector("#card-bet").innerHTML += li.innerHTML;
   });
 }
+// `${date.getFullYear()}/${date.getMonth() +
+// 1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
 
 function editCard() {
   // const card = document.createElement('div');
@@ -250,16 +254,13 @@ function betAdd() {
   const exit = document.querySelector("#add-bet-card");
   const overlay = document.querySelector(".main");
 
-  const date = new Date();
-
   // Create reference
   const dbRef = firebase.database();
 
   // Create bet
   const bet = {
     name: name,
-    date: `${date.getFullYear()}/${date.getMonth() +
-      1}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`,
+    date: new Date().getTime() / 1000,
     sum: sum,
     win: win
   };
