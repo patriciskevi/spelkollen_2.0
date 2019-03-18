@@ -2,7 +2,7 @@
   "hosting": {
     "public": "public",
     "headers": [{
-      "source": "/css/style.js",
+      "source": "/**",
       "headers": [{
         "key": "Cache-Control",
         "value": "no-cache"
