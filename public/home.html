@@ -80,7 +80,6 @@
     <script>
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-
                 document.getElementById('userPhoto').setAttribute('src', user.photoURL);
             } else {
                 window.location = 'index.html';

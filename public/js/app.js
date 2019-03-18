@@ -50,8 +50,6 @@ function logout() {
 }
 // END OF LOGIN
 
-// let bets = [];
-
 database()
   .ref()
   .child("bets")
@@ -103,45 +101,6 @@ function renderBetCard() {
   });
 }
 
-// function renderBetCard() {
-//   const betCard = document.querySelector("#card-bet");
-//   const dbRefObject = firebase
-//     .database()
-//     .ref()
-//     .child("bets");
-
-//   dbRefObject.on("value", snap => {
-//     betCard.innerHTML = "";
-//     snap.forEach(childSnap => {
-//       const li = document.createElement("li");
-//       li.innerHTML = `
-//         <div class="col s12">
-//             <div class="card horizontal">
-//                 <div class="card-stacked">
-//                     <div class="card-content">
-//                         <span class="circle"></span>
-//                         <p><b>${childSnap.val().name}</b></p>
-//                         <p>${childSnap.val().date}</p>
-//                         <p>Summa: ${childSnap.val().sum}:-</p>
-//                         <p>Vinst: ${childSnap.val().win}:-</p>
-//                     </div>
-//                     <div class="card-action">
-//                     <a href="#"><i class="material-icons card-action-icon" id="${
-//                       childSnap.key
-//                     }" onclick="betRemove('${childSnap.key}')">delete</i></a>
-//                     <a href="#" onclick="editCard()"><i class="material-icons card-action-icon">
-//                             create
-//                         </i></a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//         `;
-//       document.querySelector("#card-bet").innerHTML += li.innerHTML;
-//     });
-//   });
-// }
-
 function editCard() {
   // const card = document.createElement('div');
   // const flip = document.querySelector('.card');
@@ -186,37 +145,6 @@ function renderAddBetCard() {
     `;
 }
 
-// function playerCard() {
-//   firebase.auth().onAuthStateChanged(function(user) {
-//     for (let player of getPlayersTotalBets()) {
-//       const card = document.createElement("div");
-//       {
-//         card.innerHTML = `
-//                             <div class="col s12">
-//                                 <div class="card horizontal">
-//                                     <div class="card-stacked">
-//                                         <div class="card-content">
-//                                             <img id="cardUserPhoto" src="${
-//                                               user.photoURL
-//                                             }">
-//                                             <p><b>${user.displayName}</b>,</p>
-//                                             <p>Du har spelat för: ${
-//                                               player.sum
-//                                             }</p>
-//                                             <p>Din totala vinstsumma är: ${
-//                                               player.win
-//                                             }</p>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-//                             `;
-//         document.querySelector("#stats").innerHTML = card.innerHTML;
-//       }
-//     }
-//   });
-// }
-
 /**
  * Get current user name from firebase auth email.
  */
@@ -260,10 +188,10 @@ function totalCard() {
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
+                        <p><b>Gruppen:</b></p>
                         <p>Total summa: ${groupSum}:-<p>
                         <p>Total vinst: ${groupWin}:-</p>
                     </div>
-                    <div class="card-action"></div>
                 </div>
             </div>
         </div>
@@ -272,31 +200,18 @@ function totalCard() {
 }
 
 function userCard() {
-  console.log(getCurrentUserName().photoURL);
-  // const userPhoto = document.getElementById("user-photo");
-  // if (getCurrentUserName()) {
-  //   userPhoto.setAttribute("src", getCurrentUserName().photoURL);
-  // }
-  let groupSum = getAllUsersNames()
-    .map(userName => getUserSum(userName, "sum"))
-    .reduce((sum, userSum) => (sum += userSum), 0);
-
-  let groupWin = getAllUsersNames()
-    .map(userName => getUserSum(userName, "win"))
-    .reduce((sum, userSum) => (sum += userSum), 0);
-
+  let userSum = getUserSum(getCurrentUserName(), "sum");
+  let userWin = getUserSum(getCurrentUserName(), "win");
   const li = document.createElement("li");
   li.innerHTML = `
         <div class="col s12">
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <img src="" id="user-photo">
-                        <p>${getCurrentUserName()}</p>
-                        <p>Total summa: ${groupSum}:-<p>
-                        <p>Total vinst: ${groupWin}:-</p>
+                        <p><b>${getCurrentUserName()}:</b></p>
+                        <p>Total summa: ${userSum}:-<p>
+                        <p>Total vinst: ${userWin}:-</p>
                     </div>
-                    <div class="card-action"></div>
                 </div>
             </div>
         </div>
@@ -359,26 +274,6 @@ function betRemove(id) {
 
   // renderApp();
 }
-
-// function getPlayersTotalBets() {
-//   const players = [];
-//   for (let bet of bets) {
-//     const player = players.find(player => player.name === bet.name);
-//     if (!player) {
-//       players.push({
-//         name: bet.name,
-//         win: bet.win,
-//         sum: bet.sum,
-//         id: bet.id,
-//         date: bet.date
-//       });
-//     } else {
-//       player.win += bet.win;
-//       player.sum += bet.sum;
-//     }
-//   }
-//   return players;
-// }
 
 function renderApp() {
   renderBetCard();
