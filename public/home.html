@@ -19,19 +19,21 @@
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="#!" onclick="logout()">Logga ut</a></li>
         </ul>
-        <nav class="nav-extended header-navbar">
-            <ul id="nav-mobile" class="tabs blue">
-                <li class="tab"><a class="active" href="#active">Pågående</a></li>
-                <li class="tab"><a href="#archive">Arkiv</a></li>
-                <li class="tab"><a href="#stats">Statistik</a></li>
-                <li class="user-photo"><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"></a></li>
-            </ul>
-        </nav>
+        <div class="navbar-fixed">
+            <nav class="nav-extended header-navbar">
+                <ul id="nav-mobile" class="tabs">
+                    <li class="tab"><a class="active" href="#active">Pågående</a></li>
+                    <li class="tab"><a href="#archive">Avslutade</a></li>
+                    <li class="tab"><a href="#stats">Spelhistorik</a></li>
+                    <li class="user-photo"><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"></a></li>
+                </ul>
+            </nav>
+        </div>
 
         <!-- ACTIVE -->
         <div id="active">
             <!-- ACTION BUTTON-->
-            <a class="btn-floating btn-large waves-effect waves-light button-add blue z-depth-3 " onclick="addButton()"><i
+            <a class="btn-floating btn-large waves-effect waves-light button-add z-depth-3 " onclick="addButton()"><i
                     class="material-icons">add</i></a>
 
             <!-- CARD -->
@@ -48,18 +50,20 @@
                 <li><a href="#!">two</a></li>
                 <li><a href="#!">three</a></li>
             </ul>
-            <nav class="footer-navbar white">
-                <div class="nav-wrapper">
-                    <ul id="nav-mobile">
-                        <li><a href="#"><i class="material-icons">
-                                    message
-                                </i></a></li>
-                        <li><a class="dropdown-trigger" data-target="dropdown2" href="#"><i class="material-icons">
-                                    more_horiz
-                                </i></a></li>
-                    </ul>
-                </div>
-            </nav>
+            <div class="navbar-fixed">
+                <nav class="footer-navbar white">
+                    <div class="nav-wrapper">
+                        <ul id="nav-mobile">
+                            <li><a href="#"><i class="material-icons">
+                                        message
+                                    </i></a></li>
+                            <li><a class="dropdown-trigger" data-target="dropdown2" href="#"><i class="material-icons">
+                                        more_horiz
+                                    </i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
         </div>
 
         <!-- ARCHIVE -->

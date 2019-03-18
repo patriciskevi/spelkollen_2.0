@@ -44,6 +44,10 @@ function facebookLogin() {
   firebase.auth().onAuthStateChanged(newLogin);
 }
 
+// Email login
+function emailLogin() {}
+
+
 function logout() {
   firebase.auth().signOut();
   window.location = "index.html";
@@ -65,6 +69,8 @@ database()
         win: parseInt(item.win)
       });
     });
+    bets.sort((a, b) => b.date - a.date);
+
     console.log("original bets:", bets);
     renderApp();
   });
@@ -74,6 +80,7 @@ function renderBetCard() {
   betCard.innerHTML = "";
   bets.map(item => {
     const li = document.createElement("li");
+    console.log(Date.now());
     li.innerHTML = `
           <div class="col s12">
               <div class="card horizontal">
@@ -110,6 +117,15 @@ function editCard() {
   console.log("edit");
 }
 
+function addBetCardExit() {
+  const exit = document.querySelector("#add-bet-card");
+  const overlay = document.querySelector(".main");
+
+  exit.onclick = exit.parentNode.removeChild(exit);
+  overlay.classList.toggle("overlay");
+}
+
+
 function renderAddBetCard() {
   document.querySelector(".add-bet-card").innerHTML = `
     <div id="add-bet-card">
@@ -133,7 +149,7 @@ function renderAddBetCard() {
                     </div>
                 </div>
                 <div class="card-action">
-                <a href="#"><i class="material-icons card-action-icon">delete</i></a>
+                <a href="#"><i class="material-icons card-action-icon" onclick="addBetCardExit()">delete</i></a>
                     <a href="#" onclick="betAdd()"><i class="material-icons card-action-icon">
                     check
                     </i></a>
@@ -188,9 +204,9 @@ function totalCard() {
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <p><b>Gruppen:</b></p>
-                        <p>Total summa: ${groupSum}:-<p>
-                        <p>Total vinst: ${groupWin}:-</p>
+                        <p class="card-title"><b>Gruppen</b></p>
+                        <p>Omsättning: ${groupSum}:-<p>
+                        <p>Vinst: ${groupWin}:-</p>
                     </div>
                 </div>
             </div>
@@ -208,9 +224,9 @@ function userCard() {
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <p><b>${getCurrentUserName()}:</b></p>
-                        <p>Total summa: ${userSum}:-<p>
-                        <p>Total vinst: ${userWin}:-</p>
+                        <p class="card-title"><b>${getCurrentUserName()}</b></p>
+                        <p>Omsättning: ${userSum}:-<p>
+                        <p>Vinst: ${userWin}:-</p>
                     </div>
                 </div>
             </div>
@@ -251,7 +267,7 @@ function betAdd() {
   // Sync
   dbRef.ref("bets").push(bet);
 
-  exit.onclick = function() {
+  exit.onclick = function () {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
@@ -268,7 +284,7 @@ function betRemove(id) {
     .then(() => {
       console.log("Remove success");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("Remove failed" + error.message);
     });
 
@@ -281,6 +297,22 @@ function renderApp() {
   totalCard();
 }
 
+// const oldBets = JSON.parse(localStorage.getItem("bets"));
+
+// function pushOldBets() {
+//   oldBets.forEach(item => {
+//     database()
+//       .ref()
+//       .child("bets")
+//       .push({
+//         date: new Date(item.date).getTime() / 1000,
+//         name: item.name,
+//         sum: item.sum,
+//         win: item.win
+//       });
+//   });
+// }
+// pushOldBets();
 document.addEventListener("DOMContentLoaded", () => {
   //renderApp();
 });

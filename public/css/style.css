@@ -6,9 +6,11 @@
 
 body {
   background-color: rgba(33, 149, 243, 0.1);
+  font-family: 'Roboto';
+  font-weight: 300;
 }
 
-body > .container {
+body>.container {
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -58,17 +60,14 @@ body > .container {
   -o-transform: translateX(50%) translateY(50%);
 }
 
-.btn-add {
-  position: fixed;
-  top: 90%;
-  left: 80%;
+
+
+.header-navbar #nav-mobile {
+  background-color: #00befa;
 }
 
 #dropdown1 {
   margin-top: 35px;
-}
-.user-photo {
-  margin-left: 90px;
 }
 
 #userPhoto {
@@ -108,6 +107,21 @@ body > .container {
   -o-border-radius: 4px;
 }
 
+.card-title {
+  font-size: 1.1em;
+}
+
+#stats .card-content {
+  margin: 0 auto;
+  padding: 30px;
+  text-align: center;
+}
+
+#stats .card {
+  color: #fff;
+  background-color: #00befa;
+}
+
 #add-bet-card {
   width: 90%;
   padding: 0 15px;
@@ -133,11 +147,9 @@ body > .container {
 }
 
 .flip-vertical-fwd {
-  -webkit-animation: flip-vertical-fwd 0.4s
-    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -webkit-animation: flip-vertical-fwd 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
   animation: flip-vertical-fwd 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-  -webkit-animation: flip-vertical-fwd 0.4s
-    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  -webkit-animation: flip-vertical-fwd 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
   -webkit-backface-visibility: ;
 }
 
@@ -174,13 +186,13 @@ body > .container {
   padding: 15px;
 }
 
-.circle {
+/* .circle {
   width: 10px;
   height: 10px;
   background-color: red;
   position: absolute;
   left: 92%;
-}
+} */
 
 .card .card-action {
   padding: 5px;
@@ -189,7 +201,7 @@ body > .container {
 
 .card-action-icon {
   cursor: pointer;
-  color: #2196f3;
+  color: #00befa;
 }
 
 .tabs .tab a:focus.active {
@@ -220,7 +232,7 @@ body > .container {
 }
 
 @media (min-width: 700px) {
-  body > .container {
+  body>.container {
     width: 60%;
   }
 }
