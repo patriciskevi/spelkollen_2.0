@@ -96,6 +96,8 @@ body>.container {
   left: 83%;
 }
 
+
+
 .card {
   width: 95%;
   margin: 0 auto;
@@ -109,6 +111,28 @@ body>.container {
 
 .card-title {
   font-size: 1.1em;
+}
+
+.card-result {
+  font-size: 1.3em;
+}
+
+#bet-remove-text {
+  text-align: center;
+  font-weight: 400;
+  padding: 20px;
+}
+
+#bet-remove-actions {
+  text-align: center;
+}
+
+.card-actions {
+  text-align: center;
+}
+
+.card-actions i {
+  padding: 0 20px;
 }
 
 #stats .card-content {
