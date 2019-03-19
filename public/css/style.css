@@ -92,8 +92,10 @@ body>.container {
 
 .button-add {
   position: fixed;
-  top: 84%;
-  left: 83%;
+  bottom: 0;
+  right: 0;
+  margin-right: 13px;
+  margin-bottom: 60px;
 }
 
 

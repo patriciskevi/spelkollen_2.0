@@ -381,7 +381,7 @@ function betUpdate(id) {
   };
 
   // Sync
-  dbRef.ref("bets").push(bet);
+  dbRef.ref(`bets/${id}`).update(bet);
 
   exit.onclick = function () {
     exit.parentNode.removeChild(exit);
