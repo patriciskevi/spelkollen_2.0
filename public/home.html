@@ -17,16 +17,28 @@
 <body>
     <div class="main">
         <!-- HEADER NAVBAR -->
-        <ul id="dropdown1" class="dropdown-content">
+        <!-- <ul id="dropdown1" class="dropdown-content">
             <li><a href="#!" onclick="logout()">Logga ut</a></li>
-        </ul>
+        </ul> -->
+        <div id="slide-out" class="sidenav">
+            <div class="valign-wrapper top-sidenav">
+                <a href="#" class="sidenav-close"><i class="material-icons">
+                        close
+                    </i></a>
+            </div>
+            <div class="user-view center">
+                <img class="userPhoto circle" src="">
+                <!-- <span class="name">User name</span> -->
+            </div>
+            <div id="stats"></div>
+        </div>
         <div class="navbar-fixed">
             <nav class="nav-extended header-navbar">
                 <ul id="nav-mobile" class="tabs">
                     <li class="tab"><a class="active" href="#active">Pågående</a></li>
                     <li class="tab"><a href="#archive">Avslutade</a></li>
-                    <li class="tab"><a href="#stats">Spelhistorik</a></li>
-                    <li class="user-photo"><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img src="" id="userPhoto"></a></li>
+                    <li class="user-photo"><a class="sidenav-trigger" href="#" data-target="slide-out"><img
+                                class="userPhoto" src="">User-photo</a></li>
                 </ul>
             </nav>
         </div>
@@ -39,39 +51,36 @@
 
             <!-- CARD -->
             <div id="card-bet"></div>
-
-            <!-- Test av firebase database -->
-            <ul id="display-text"></ul>
-
-
-            <!-- FOOTER NAVBAR -->
-            <!-- Dropdown Structure -->
-            <ul id="dropdown2" class="dropdown-content">
-                <li><a href="#!">one</a></li>
-                <li><a href="#!">two</a></li>
-                <li><a href="#!">three</a></li>
-            </ul>
-            <div class="navbar-fixed">
-                <nav class="footer-navbar white">
-                    <div class="nav-wrapper">
-                        <ul id="nav-mobile">
-                            <li><a href="#"><i class="material-icons">
-                                        message
-                                    </i></a></li>
-                            <li><a class="dropdown-trigger" data-target="dropdown2" href="#"><i class="material-icons">
-                                        more_horiz
-                                    </i></a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
         </div>
-
         <!-- ARCHIVE -->
         <div id="archive"></div>
+        <!-- FOOTER NAVBAR -->
+        <!-- Dropdown Structure -->
+        <ul id="dropdown2" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li><a href="#!">two</a></li>
+            <li><a href="#!">three</a></li>
+        </ul>
+        <div class="navbar-fixed">
+            <nav class="footer-navbar white">
+                <div class="nav-wrapper">
+                    <ul id="nav-mobile">
+                        <li><a href="#"><i class="material-icons">
+                                    message
+                                </i></a></li>
+                        <li><a class="dropdown-trigger" data-target="dropdown2" href="#"><i class="material-icons">
+                                    more_horiz
+                                </i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+
 
         <!-- STATS -->
-        <div id="stats"></div>
+        <!-- <div id="stats"></div> -->
     </div>
 
     <!-- ADD BET CARD ON OVERLAY -->
@@ -84,7 +93,7 @@
     <script>
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                document.getElementById('userPhoto').setAttribute('src', user.photoURL);
+                document.querySelector('.userPhoto').setAttribute('src', user.photoURL);
             } else {
                 window.location = 'index.html';
             }
@@ -92,12 +101,21 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.dropdown-trigger');
-            var instances = M.Dropdown.init(elems, {
-                hover: false
+            var elems = document.querySelectorAll('.sidenav');
+            var instance = M.Sidenav.init(elems, {
+                edge: 'right',
+                draggable: true
             });
         });
 
+
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var elems = document.querySelectorAll('.dropdown-trigger');
+        //     var instances = M.Dropdown.init(elems, {
+        //         hover: false
+        //     });
+        // });
+        var instance = M.Sidenav.getInstance(document.querySelector('.tabs'));
         var instance = M.Tabs.init(document.querySelector('.tabs'), {});
     </script>
 </body>

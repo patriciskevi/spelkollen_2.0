@@ -47,13 +47,11 @@ function facebookLogin() {
 // Email login
 function emailLogin() {}
 
-
 function logout() {
   firebase.auth().signOut();
   window.location = "index.html";
 }
 // END OF LOGIN
-
 
 database()
   .ref()
@@ -67,7 +65,8 @@ database()
         date: item.date,
         name: item.name,
         sum: parseInt(item.sum),
-        win: parseInt(item.win)
+        win: parseInt(item.win),
+        archived: item.archived
       });
     });
     bets.sort((a, b) => b.date - a.date);
@@ -76,53 +75,126 @@ database()
     renderApp();
   });
 
-
 function renderBetCard() {
+  const archivedBetCard = document.querySelector("#archive");
+  archivedBetCard.innerHTML = "";
+
   const betCard = document.querySelector("#card-bet");
   betCard.innerHTML = "";
-
   bets.map(item => {
-    const li = document.createElement("li");
-    const date = new Date(item.date * 1000);
+    if (item.archived) {
+      const li = document.createElement("li");
+      const date = new Date(item.date * 1000);
 
-    li.innerHTML = `
-            <div class="col s12">
-                <div class="card horizontal">
-                    <div class="card-stacked">
-                        <div class="card-content">
-                            <span class="circle"></span>
-                            <p><b>${item.name}</b></p>
-                            <p>${date.getFullYear()}-${date.getMonth() +1}-${date.getDate()}, ${date.getHours()}:${date.getMinutes()}</p>
-                            <p>Summa: ${item.sum}:-</p>
-                            <p>Vinst: ${item.win}:-</p> 
-                        </div>
-                        <div class="card-action">
-                        <a href="#"><i class="material-icons card-action-icon" id="${
-                          item.key
-                        }" onclick="betRemoveCard('${item.key}')">delete</i></a>
-                        <a href="#" onclick="editCard('${item.key}')"><i class="material-icons card-action-icon">
-                                create
-                            </i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `;
-    document.querySelector("#card-bet").innerHTML += li.innerHTML;
+      li.innerHTML = `
+      <div class="col s12 bet-card">
+          <div class="card horizontal">
+              <div class="card-stacked">
+                  <div class="card-content bet-card-content">
+                      <img class="profile-pic" src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png">
+                      <div class="profile-name">
+                        <p><b>${item.name}</b></p>
+                      </div>
+                      <div class="item-date">
+                        <p><b>${date.getFullYear()}-${date.getMonth() +
+        1}-${date.getDate()}</b></p>
+                        <p>${date.getHours()}:${(date.getMinutes() < 10
+        ? "0"
+        : "") + date.getMinutes()}</p>
+                      </div>
+                  </div>
+                  <div class="item-details">
+                      <p>Summa: ${item.sum}:-</p>
+                      <p>Vinst: ${item.win}:-</p>
+                  </div>
+                  <div class="card-action">
+                    <a href="#"><i class="material-icons card-action-icon" id="" onclick="betRemoveCard('${
+                      item.key
+                    }')">delete</i></a>
+                    <a href="#" onclick="editCard('${
+                      item.key
+                    }')"><i class="material-icons card-action-icon">
+                          create
+                      </i></a>
+                  </div>
+              </div>
+          </div>
+      </div>
+      `;
+      document.querySelector("#archive").innerHTML += li.innerHTML;
+    } else {
+      const li = document.createElement("li");
+      const date = new Date(item.date * 1000);
+
+      li.innerHTML = `
+              <div class="col s12 bet-card">
+                  <div class="card horizontal">
+                      <div class="card-stacked">
+                          <div class="card-content bet-card-content">
+                              <img class="profile-pic" src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png">
+                              <div class="profile-name">
+                                <p><b>${item.name}</b></p>
+                              </div>
+                              <div class="item-date">
+                                <p><b>${date.getFullYear()}-${date.getMonth() +
+        1}-${date.getDate()}</b></p>
+                                <p>${date.getHours()}:${(date.getMinutes() < 10
+        ? "0"
+        : "") + date.getMinutes()}</p>
+                              </div>
+                          </div>
+                          <div class="item-details">
+                              <p>Summa: ${item.sum}:-</p>
+                              <p>Vinst: ${item.win}:-</p> 
+                          </div>
+                          <div class="card-action">
+                            <a href="#"><i class="material-icons card-action-icon" id="" onclick="betRemoveCard('${
+                              item.key
+                            }')">delete</i></a>
+                            <a href="#" onclick="editCard('${
+                              item.key
+                            }')"><i class="material-icons card-action-icon">
+                                  create
+                              </i></a>
+                            <a href="#" id="${item.key}" onclick="archiveBet('${
+        item.key
+      }')"><i class="material-icons card-action-icon">
+                                      archive
+                                </i></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              `;
+      document.querySelector("#card-bet").innerHTML += li.innerHTML;
+    }
   });
+}
+
+function archiveBet(id) {
+  let bet = {
+    archived: true
+  };
+
+  firebase.database().ref(`bets/${id}`);
+
+  firebase
+    .database()
+    .ref(`bets/${id}`)
+    .update(bet);
 }
 
 function editCard(id) {
   const overlay = document.querySelector(".main");
   overlay.classList.toggle("overlay");
 
-  firebase.database().ref(`bets/${id}`).once('value').then(snapshot => {
-    const {
-      name,
-      sum,
-      win
-    } = snapshot.val();
-    document.querySelector(".add-bet-card").innerHTML = `
+  firebase
+    .database()
+    .ref(`bets/${id}`)
+    .once("value")
+    .then(snapshot => {
+      const { name, sum, win } = snapshot.val();
+      document.querySelector(".add-bet-card").innerHTML = `
         <div id="add-bet-card">
         <div class="col s12">
             <div class="card horizontal add-bet-card">
@@ -154,8 +226,7 @@ function editCard(id) {
         </div>    
         </div>
         `;
-  });
-
+    });
 }
 
 function addBetCardExit() {
@@ -165,7 +236,6 @@ function addBetCardExit() {
   exit.onclick = exit.parentNode.removeChild(exit);
   overlay.classList.toggle("overlay");
 }
-
 
 function renderAddBetCard() {
   document.querySelector(".add-bet-card").innerHTML = `
@@ -229,6 +299,8 @@ function getAllUsersNames() {
   return ["Tobias", "Kent", "Patric"];
 }
 
+function getCurrentUserEmail() {}
+
 function totalCard() {
   let groupSum = getAllUsersNames()
     .map(userName => getUserSum(userName, "sum"))
@@ -263,7 +335,7 @@ function userCard() {
   let userSum = getUserSum(getCurrentUserName(), "sum");
   let userWin = getUserSum(getCurrentUserName(), "win");
   let sum = userWin - userSum;
-  const result = document.getElementsByClassName('card-result');
+  const result = document.getElementsByClassName("card-result");
   result.innerHTML = sum;
   const li = document.createElement("li");
 
@@ -297,38 +369,36 @@ function addButton() {
   overlay.classList.toggle("overlay");
 }
 
+// function betAdd() {
+//   // Get elements
+//   const name = document.querySelector("#name").value;
+//   const sum = document.querySelector("#sum").value;
+//   const win = document.querySelector("#win").value;
+//   const exit = document.querySelector("#add-bet-card");
+//   const overlay = document.querySelector(".main");
 
+//   // Create reference
+//   const dbRef = firebase.database();
 
-function betAdd() {
-  // Get elements
-  const name = document.querySelector("#name").value;
-  const sum = document.querySelector("#sum").value;
-  const win = document.querySelector("#win").value;
-  const exit = document.querySelector("#add-bet-card");
-  const overlay = document.querySelector(".main");
+//   // Create bet
+//   const bet = {
+//     name: name,
+//     date: new Date().getTime() / 1000,
+//     sum: sum,
+//     win: win
+//   };
 
-  // Create reference
-  const dbRef = firebase.database();
+//   // Sync
+//   dbRef.ref("bets").push(bet);
 
-  // Create bet
-  const bet = {
-    name: name,
-    date: new Date().getTime() / 1000,
-    sum: sum,
-    win: win
-  };
-
-  // Sync
-  dbRef.ref("bets").push(bet);
-
-  exit.onclick = function () {
-    exit.parentNode.removeChild(exit);
-    overlay.classList.toggle("overlay");
-  };
-  //   renderApp();
-  //   playerCard();
-  // totalCard();
-}
+//   exit.onclick = function() {
+//     exit.parentNode.removeChild(exit);
+//     overlay.classList.toggle("overlay");
+//   };
+//   //   renderApp();
+//   //   playerCard();
+//   // totalCard();
+// }
 
 function betAdd() {
   // Get elements
@@ -346,13 +416,14 @@ function betAdd() {
     name: name,
     date: new Date().getTime() / 1000,
     sum: sum,
-    win: win
+    win: win,
+    archived: false
   };
 
   // Sync
   dbRef.ref("bets").push(bet);
 
-  exit.onclick = function () {
+  exit.onclick = function() {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
@@ -377,13 +448,14 @@ function betUpdate(id) {
     name: name,
     date: new Date().getTime() / 1000,
     sum: sum,
-    win: win
+    win: win,
+    archived: false
   };
 
   // Sync
   dbRef.ref(`bets/${id}`).update(bet);
 
-  exit.onclick = function () {
+  exit.onclick = function() {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
@@ -399,7 +471,7 @@ function betRemove(id) {
     .then(() => {
       console.log("Remove success");
     })
-    .catch(function (error) {
+    .catch(function(error) {
       console.log("Remove failed" + error.message);
     });
 }
@@ -453,7 +525,3 @@ function renderApp() {
 //   });
 // }
 // pushOldBets();
-
-document.addEventListener("DOMContentLoaded", () => {
-  //renderApp();
-});

@@ -6,7 +6,7 @@
 
 body {
   background-color: rgba(33, 149, 243, 0.1);
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-weight: 300;
 }
 
@@ -60,8 +60,6 @@ body>.container {
   -o-transform: translateX(50%) translateY(50%);
 }
 
-
-
 .header-navbar #nav-mobile {
   background-color: #00befa;
 }
@@ -70,7 +68,19 @@ body>.container {
   margin-top: 35px;
 }
 
-#userPhoto {
+.top-sidenav {
+  padding: 5px;
+}
+
+
+
+.user-view img {
+  margin: 0 auto;
+  margin-top: -15px;
+  margin-bottom: 35px;
+}
+
+.userPhoto {
   width: 40px;
   margin-top: 4px;
   border-radius: 50%;
@@ -98,8 +108,6 @@ body>.container {
   margin-bottom: 60px;
 }
 
-
-
 .card {
   width: 95%;
   margin: 0 auto;
@@ -111,8 +119,38 @@ body>.container {
   -o-border-radius: 4px;
 }
 
+.bet-card-content {
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr;
+}
+
+.profile-pic {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+
+.profile-name {
+  margin-left: 20px;
+}
+
+.item-date {
+  justify-self: end;
+  text-align: right;
+}
+
+.item-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 0 0 15px 15px;
+}
+
 .card-title {
-  font-size: 1.1em;
+  font-size: 1.3em;
 }
 
 .card-result {
