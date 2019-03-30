@@ -31,6 +31,9 @@
                 <!-- <span class="name">User name</span> -->
             </div>
             <div id="stats"></div>
+            <div class="card"">
+                <canvas id=" myChart"></canvas>
+            </div>
         </div>
         <div class="navbar-fixed">
             <nav class="nav-extended header-navbar">
@@ -86,7 +89,7 @@
     <!-- ADD BET CARD ON OVERLAY -->
     <div class="add-bet-card"></div>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="js/app.js?w123"></script>
@@ -118,6 +121,7 @@
         var instance = M.Sidenav.getInstance(document.querySelector('.tabs'));
         var instance = M.Tabs.init(document.querySelector('.tabs'), {});
     </script>
+
 </body>
 
 

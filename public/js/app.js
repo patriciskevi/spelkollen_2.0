@@ -81,12 +81,13 @@ function renderBetCard() {
 
   const betCard = document.querySelector("#card-bet");
   betCard.innerHTML = "";
-  bets.map(item => {
-    if (item.archived) {
-      const li = document.createElement("li");
-      const date = new Date(item.date * 1000);
 
-      li.innerHTML = `
+  bets.map(item => {
+    // if (item.archived) {
+    const li = document.createElement("li");
+    const date = new Date(item.date * 1000);
+
+    li.innerHTML = `
       <div class="col s12 bet-card">
           <div class="card horizontal">
               <div class="card-stacked">
@@ -97,10 +98,10 @@ function renderBetCard() {
                       </div>
                       <div class="item-date">
                         <p><b>${date.getFullYear()}-${date.getMonth() +
-        1}-${date.getDate()}</b></p>
+      1}-${date.getDate()}</b></p>
                         <p>${date.getHours()}:${(date.getMinutes() < 10
-        ? "0"
-        : "") + date.getMinutes()}</p>
+      ? "0"
+      : "") + date.getMinutes()}</p>
                       </div>
                   </div>
                   <div class="item-details">
@@ -116,59 +117,27 @@ function renderBetCard() {
                     }')"><i class="material-icons card-action-icon">
                           create
                       </i></a>
+                      ${getArchiveBtn(item)}
                   </div>
               </div>
           </div>
       </div>
       `;
-      document.querySelector("#archive").innerHTML += li.innerHTML;
+    if (item.archived) {
+      archivedBetCard.innerHTML += li.innerHTML;
     } else {
-      const li = document.createElement("li");
-      const date = new Date(item.date * 1000);
-
-      li.innerHTML = `
-              <div class="col s12 bet-card">
-                  <div class="card horizontal">
-                      <div class="card-stacked">
-                          <div class="card-content bet-card-content">
-                              <img class="profile-pic" src="https://www.qualiscare.com/wp-content/uploads/2017/08/default-user.png">
-                              <div class="profile-name">
-                                <p><b>${item.name}</b></p>
-                              </div>
-                              <div class="item-date">
-                                <p><b>${date.getFullYear()}-${date.getMonth() +
-        1}-${date.getDate()}</b></p>
-                                <p>${date.getHours()}:${(date.getMinutes() < 10
-        ? "0"
-        : "") + date.getMinutes()}</p>
-                              </div>
-                          </div>
-                          <div class="item-details">
-                              <p>Summa: ${item.sum}:-</p>
-                              <p>Vinst: ${item.win}:-</p> 
-                          </div>
-                          <div class="card-action">
-                            <a href="#"><i class="material-icons card-action-icon" id="" onclick="betRemoveCard('${
-                              item.key
-                            }')">delete</i></a>
-                            <a href="#" onclick="editCard('${
-                              item.key
-                            }')"><i class="material-icons card-action-icon">
-                                  create
-                              </i></a>
-                            <a href="#" id="${item.key}" onclick="archiveBet('${
-        item.key
-      }')"><i class="material-icons card-action-icon">
-                                      archive
-                                </i></a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              `;
-      document.querySelector("#card-bet").innerHTML += li.innerHTML;
+      betCard.innerHTML += li.innerHTML;
     }
   });
+}
+
+function getArchiveBtn(item) {
+  if (item.archived) {
+    return "";
+  }
+  return `<a href="#" id="${item.key}" onclick="archiveBet('${
+    item.key
+  }')"><i class="material-icons card-action-icon">archive</i></a>`;
 }
 
 function archiveBet(id) {
@@ -363,6 +332,50 @@ function userCard() {
   document.querySelector("#stats").innerHTML += li.innerHTML;
 }
 
+function displayCharts() {
+  let ctx = document.getElementById("myChart").getContext("2d");
+  let myChart = new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["Jan", "Feb", "Mar", "April", "Maj", "Juni", "Juli"],
+      datasets: [
+        {
+          label: "# of Votes",
+          data: [1000, 2000, 3000, 2000, 2500, 1000, 4000],
+          backgroundColor: [
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(255, 206, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(255, 159, 64, 0.2)"
+          ],
+          borderColor: [
+            "rgba(255, 99, 132, 1)",
+            "rgba(54, 162, 235, 1)",
+            "rgba(255, 206, 86, 1)",
+            "rgba(75, 192, 192, 1)",
+            "rgba(153, 102, 255, 1)",
+            "rgba(255, 159, 64, 1)"
+          ],
+          borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      }
+    }
+  });
+}
+
 function addButton() {
   const overlay = document.querySelector(".main");
   renderAddBetCard();
@@ -525,3 +538,7 @@ function renderApp() {
 //   });
 // }
 // pushOldBets();
+
+// window.onload = function() {
+//   displayCharts();
+// };
