@@ -1,57 +1,24 @@
-// LOGIN
+import firebase from './firebase';
+import {
+  googleLogin,
+  facebookLogin
+} from './auth';
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyD81EtdnxKg8C2-1VhVB7QQCbps9mBYgFY",
-  authDomain: "spelkollen-ea7cc.firebaseapp.com",
-  databaseURL: "https://spelkollen-ea7cc.firebaseio.com",
-  projectId: "spelkollen-ea7cc",
-  storageBucket: "spelkollen-ea7cc.appspot.com",
-  messagingSenderId: "744517835900"
-};
-firebase.initializeApp(config);
+
+
+window.googleLogin = googleLogin;
+window.facebookLogin = facebookLogin;
 
 const database = firebase.database;
 
+
+
+
+
+
+
 let bets = [];
 
-// GOOGLE LOGIN
-function googleLogin() {
-  function newLogin(user) {
-    if (user) {
-      window.location = "home.html";
-    } else {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      const auth = firebase.auth().signInWithPopup(provider);
-    }
-  }
-
-  firebase.auth().onAuthStateChanged(newLogin);
-}
-
-// FACEBOOK LOGIN
-function facebookLogin() {
-  function newLogin(user) {
-    if (user) {
-      window.location = "home.html";
-      app(user);
-    } else {
-      const provider = new firebase.auth.FacebookAuthProvider();
-      const auth = firebase.auth().signInWithPopup(provider);
-    }
-  }
-
-  firebase.auth().onAuthStateChanged(newLogin);
-}
-
-// Email login
-function emailLogin() {}
-
-function logout() {
-  firebase.auth().signOut();
-  window.location = "index.html";
-}
-// END OF LOGIN
 
 database()
   .ref()
@@ -73,13 +40,16 @@ database()
 
     console.log("original bets:", bets);
     renderApp();
+    displayCharts();
   });
 
 function renderBetCard() {
-  const archivedBetCard = document.querySelector("#archive");
+
+  const archivedBetCard = document.getElementById("archive");
+  console.log(archivedBetCard);
   archivedBetCard.innerHTML = "";
 
-  const betCard = document.querySelector("#card-bet");
+  const betCard = document.getElementById("card-bet");
   betCard.innerHTML = "";
 
   bets.map(item => {
@@ -162,7 +132,11 @@ function editCard(id) {
     .ref(`bets/${id}`)
     .once("value")
     .then(snapshot => {
-      const { name, sum, win } = snapshot.val();
+      const {
+        name,
+        sum,
+        win
+      } = snapshot.val();
       document.querySelector(".add-bet-card").innerHTML = `
         <div id="add-bet-card">
         <div class="col s12">
@@ -215,7 +189,7 @@ function renderAddBetCard() {
                 <div class="card-content">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="name" type="text" class="validate" value="${getCurrentUserName()}">
+                            <input id="name" type="text" class="validate" value="${window.testUser}">
                         </div>
                         <div class="input-field col s12">
                             <input id="sum" type="text" class="validate">
@@ -240,20 +214,7 @@ function renderAddBetCard() {
     `;
 }
 
-/**
- * Get current user name from firebase auth email.
- */
-function getCurrentUserName() {
-  const email = firebase.auth().currentUser.email;
 
-  if (email === "patriciskevi@gmail.com") {
-    return "Patric";
-  } else if (email === "taddis@gmail.com") {
-    return "Tobias";
-  } else if (email === "kent.carlsson@start-up.se") {
-    return "Kent";
-  }
-}
 
 /**
  * Get sum for current user.
@@ -267,8 +228,6 @@ function getUserSum(userName, property) {
 function getAllUsersNames() {
   return ["Tobias", "Kent", "Patric"];
 }
-
-function getCurrentUserEmail() {}
 
 function totalCard() {
   let groupSum = getAllUsersNames()
@@ -301,8 +260,8 @@ function totalCard() {
 }
 
 function userCard() {
-  let userSum = getUserSum(getCurrentUserName(), "sum");
-  let userWin = getUserSum(getCurrentUserName(), "win");
+  let userSum = getUserSum(window.testUser, "sum");
+  let userWin = getUserSum(window.testUser, "win");
   let sum = userWin - userSum;
   const result = document.getElementsByClassName("card-result");
   result.innerHTML = sum;
@@ -319,7 +278,7 @@ function userCard() {
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
-                        <p class="card-title"><b>${getCurrentUserName()}</b></p>
+                        <p class="card-title"><b>${window.testUser}</b></p>
                         <p>Omsättning: ${userSum}:-<p>
                         <p>Vinst: ${userWin}:-</p>
                         <br>
@@ -333,44 +292,34 @@ function userCard() {
 }
 
 function displayCharts() {
-  let ctx = document.getElementById("myChart").getContext("2d");
-  let myChart = new Chart(ctx, {
+  var ctx = document.getElementById("myChart").getContext("2d");
+  var myChart = new Chart(ctx, {
     type: "line",
     data: {
-      labels: ["Jan", "Feb", "Mar", "April", "Maj", "Juni", "Juli"],
-      datasets: [
+      labels: ["Jan", "Feb", "Mar"],
+      datasets: [{
+          label: "Omsättning",
+          data: [1487, 14334, 13419],
+          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
+          borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 1
+        },
         {
-          label: "# of Votes",
-          data: [1000, 2000, 3000, 2000, 2500, 1000, 4000],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(255, 206, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(255, 159, 64, 0.2)"
-          ],
-          borderColor: [
-            "rgba(255, 99, 132, 1)",
-            "rgba(54, 162, 235, 1)",
-            "rgba(255, 206, 86, 1)",
-            "rgba(75, 192, 192, 1)",
-            "rgba(153, 102, 255, 1)",
-            "rgba(255, 159, 64, 1)"
-          ],
+          label: "Vinst",
+          data: [2735, 12986, 30811],
+          backgroundColor: ["rgba(255, 199, 132, 0.2)"],
+          borderColor: ["rgba(255, 199, 132, 1)"],
           borderWidth: 1
         }
       ]
     },
     options: {
       scales: {
-        yAxes: [
-          {
-            ticks: {
-              beginAtZero: true
-            }
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
           }
-        ]
+        }]
       }
     }
   });
@@ -436,7 +385,7 @@ function betAdd() {
   // Sync
   dbRef.ref("bets").push(bet);
 
-  exit.onclick = function() {
+  exit.onclick = function () {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
@@ -468,7 +417,7 @@ function betUpdate(id) {
   // Sync
   dbRef.ref(`bets/${id}`).update(bet);
 
-  exit.onclick = function() {
+  exit.onclick = function () {
     exit.parentNode.removeChild(exit);
     overlay.classList.toggle("overlay");
   };
@@ -484,7 +433,7 @@ function betRemove(id) {
     .then(() => {
       console.log("Remove success");
     })
-    .catch(function(error) {
+    .catch(function (error) {
       console.log("Remove failed" + error.message);
     });
 }
@@ -519,6 +468,62 @@ function renderApp() {
   renderBetCard();
   userCard();
   totalCard();
+  // getResults();
+  // janResults();
+  // febResults();
+  // marchResults();
+}
+
+function getResults() {
+  let numberOfWins = bets.filter(item => item.win > 0);
+  let numberOfBets = bets.filter(item => item.sum > 0);
+  let mostWins = numberOfWins.filter(item => item.na);
+  console.log(numberOfWins, numberOfBets);
+}
+
+function janResults() {
+  let betsJan = bets.filter(
+    item => item.date < toTimestamp("01/31/2019 23:59:59")
+  );
+
+  // let janWin = betsJan.filter(item => item.win);
+  // let janSum = betsJan.map(item => item.sum);
+
+  janTotWin = betsJan.reduce((acc, item) => acc + item.win, 0);
+  janTotSum = betsJan.reduce((acc, item) => acc + item.sum, 0);
+
+  console.log(betsJan, janTotWin, janTotSum);
+}
+
+function febResults() {
+  let betsFeb = bets.filter(
+    item =>
+    item.date > toTimestamp("01/31/2019 23:59:59") &&
+    item.date < toTimestamp("02/28/2019 23:59:59")
+  );
+
+  febTotWin = betsFeb.reduce((acc, item) => acc + item.win, 0);
+  febTotSum = betsFeb.reduce((acc, item) => acc + item.sum, 0);
+
+  console.log(betsFeb, febTotWin, febTotSum);
+}
+
+function marchResults() {
+  let betsMarch = bets.filter(
+    item =>
+    item.date > toTimestamp("02/28/2019 23:59:59") &&
+    item.date < toTimestamp("03/31/2019 23:59:59")
+  );
+  let marchTotWin = betsMarch.reduce((acc, item) => acc + item.win, 0);
+  let marchTotSum = betsMarch.reduce((acc, item) => acc + item.sum, 0);
+
+  console.log(betsMarch, marchTotWin, marchTotSum);
+}
+
+function toTimestamp(firstDate, secondDate) {
+  const dateOne = Date.parse(firstDate);
+  const dateTwo = Date.parse(secondDate);
+  return dateOne / 1000;
 }
 
 // Get localstorage and push it to firebase database

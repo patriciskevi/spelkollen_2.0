@@ -1,0 +1,30 @@
+{
+  "name": "spelkollen_2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "firebase": "^5.9.2",
+    "firebase-tools": "^6.4.0",
+    "parcel-bundler": "^1.12.3"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel public/index.html",
+    "build": "parcel build public/js/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patriciskevi/spelkollen_2.0.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/patriciskevi/spelkollen_2.0/issues"
+  },
+  "homepage": "https://github.com/patriciskevi/spelkollen_2.0#readme"
+}

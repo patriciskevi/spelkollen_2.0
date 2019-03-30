@@ -16,6 +16,14 @@ body>.container {
   display: flex;
 }
 
+.page {
+  display: none;
+}
+
+.page-active {
+  display: block;
+}
+
 .container {
   display: flex;
 }
