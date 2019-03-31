@@ -63,9 +63,12 @@
             </ul> -->
             <div id="slide-out" class="sidenav">
                 <div class="valign-wrapper top-sidenav">
+
                     <a href="#" class="sidenav-close"><i class="material-icons">
                             close
                         </i></a>
+                    <!-- <a href="#!" class="logout-btn right" onclick="spelkollen.logout()">Logga ut</a> -->
+
                 </div>
                 <div class="user-view center">
                     <img class="userPhoto circle" src="">
@@ -82,11 +85,16 @@
             </div>
             <div class="navbar-fixed">
                 <nav class="nav-extended header-navbar">
-                    <ul id="nav-mobile" class="tabs">
+                    <ul id="nav-mobile" class="tabs valign-wrapper">
                         <li class="tab"><a class="active" href="#active">Pågående</a></li>
                         <li class="tab"><a href="#archive">Avslutade</a></li>
-                        <li class="user-photo"><a class="sidenav-trigger" href="#" data-target="slide-out"><img
-                                    class="userPhoto" src="">User-photo</a></li>
+                        <li class="user-photo">
+                            <a class="sidenav-trigger" href="#" data-target="slide-out">
+                                <i class="material-icons">
+                                    person
+                                </i>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

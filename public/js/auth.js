@@ -49,12 +49,13 @@ firebase.auth().onAuthStateChanged((user) => {
 // Email login
 // function emailLogin() {}
 
-// function logout() {
-//     firebase.auth().signOut();
-//     window.location = "index.html";
-// }
+const logout = () => {
+    firebase.auth().signOut();
+    window.location = "index.html";
+}
 // END OF LOGIN
 export {
     googleLogin,
-    facebookLogin
+    facebookLogin,
+    logout
 };

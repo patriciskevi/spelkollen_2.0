@@ -1,7 +1,8 @@
 import firebase from './firebase';
 import {
   googleLogin,
-  facebookLogin
+  facebookLogin,
+  logout
 } from './auth';
 import {
   arch
@@ -548,6 +549,7 @@ window.spelkollen.editCard = editCard;
 window.spelkollen.betRemoveCard = betRemoveCard;
 window.spelkollen.betRemove = betRemove;
 window.spelkollen.betUpdate = betUpdate;
+window.spelkollen.logout = logout;
 
 // Get localstorage and push it to firebase database
 // const oldBets = JSON.parse(localStorage.getItem("bets"));
