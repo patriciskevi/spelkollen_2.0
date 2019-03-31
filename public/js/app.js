@@ -3,11 +3,11 @@ import {
   googleLogin,
   facebookLogin
 } from './auth';
+import {
+  arch
+} from 'os';
 
 
-
-window.googleLogin = googleLogin;
-window.facebookLogin = facebookLogin;
 
 const database = firebase.database;
 
@@ -79,10 +79,10 @@ function renderBetCard() {
                       <p>Vinst: ${item.win}:-</p>
                   </div>
                   <div class="card-action">
-                    <a href="#"><i class="material-icons card-action-icon" id="" onclick="betRemoveCard('${
+                    <a href="#"><i class="material-icons card-action-icon" id="" onclick="spelkollen.betRemoveCard('${
                       item.key
                     }')">delete</i></a>
-                    <a href="#" onclick="editCard('${
+                    <a href="#" onclick="spelkollen.editCard('${
                       item.key
                     }')"><i class="material-icons card-action-icon">
                           create
@@ -105,7 +105,7 @@ function getArchiveBtn(item) {
   if (item.archived) {
     return "";
   }
-  return `<a href="#" id="${item.key}" onclick="archiveBet('${
+  return `<a href="#" id="${item.key}" onclick="spelkollen.archiveBet('${
     item.key
   }')"><i class="material-icons card-action-icon">archive</i></a>`;
 }
@@ -158,8 +158,8 @@ function editCard(id) {
                             </div>
                         </div>
                         <div class="card-actions">
-                          <a href="#"><i class="material-icons card-action-icon" onclick="addBetCardExit()">arrow_back</i></a>
-                              <a href="#" onclick="betUpdate('${id}')"><i class="material-icons card-action-icon">
+                          <a href="#"><i class="material-icons card-action-icon" onclick="spelkollen.addBetCardExit()">arrow_back</i></a>
+                              <a href="#" onclick="spelkollen.betUpdate('${id}')"><i class="material-icons card-action-icon">
                               check
                               </i></a>
                         </div>
@@ -201,8 +201,8 @@ function renderAddBetCard() {
                         </div>
                     </div>
                     <div class="card-actions">
-                <a href="#"><i class="material-icons card-action-icon" onclick="addBetCardExit()">arrow_back</i></a>
-                    <a href="#" onclick="betAdd()"><i class="material-icons card-action-icon">
+                <a href="#"><i class="material-icons card-action-icon" onclick="spelkollen.addBetCardExit()">arrow_back</i></a>
+                    <a href="#" onclick="spelkollen.betAdd()"><i class="material-icons card-action-icon">
                     check
                     </i></a>
                 </div>
@@ -294,21 +294,21 @@ function userCard() {
 function displayCharts() {
   var ctx = document.getElementById("myChart").getContext("2d");
   var myChart = new Chart(ctx, {
-    type: "line",
+    type: "bar",
     data: {
       labels: ["Jan", "Feb", "Mar"],
       datasets: [{
           label: "Omsättning",
-          data: [1487, 14334, 13419],
-          backgroundColor: ["rgba(255, 99, 132, 0.2)"],
-          borderColor: ["rgba(255, 99, 132, 1)"],
+          data: [14877, 14334, 13419],
+          backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)"],
+          borderColor: ["rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)"],
           borderWidth: 1
         },
         {
           label: "Vinst",
           data: [2735, 12986, 30811],
-          backgroundColor: ["rgba(255, 199, 132, 0.2)"],
-          borderColor: ["rgba(255, 199, 132, 1)"],
+          backgroundColor: ["rgba(255, 199, 132, 0.2)", "rgba(255, 199, 132, 0.2)", "rgba(255, 199, 132, 0.2)"],
+          borderColor: ["rgba(255, 199, 132, 1)", "rgba(255, 199, 132, 1)", "rgba(255, 199, 132, 1)"],
           borderWidth: 1
         }
       ]
@@ -325,11 +325,11 @@ function displayCharts() {
   });
 }
 
-function addButton() {
+const addButton = () => {
   const overlay = document.querySelector(".main");
   renderAddBetCard();
   overlay.classList.toggle("overlay");
-}
+};
 
 // function betAdd() {
 //   // Get elements
@@ -362,7 +362,7 @@ function addButton() {
 //   // totalCard();
 // }
 
-function betAdd() {
+const betAdd = () => {
   // Get elements
   const name = document.querySelector("#name").value;
   const sum = document.querySelector("#sum").value;
@@ -394,7 +394,7 @@ function betAdd() {
   //   totalCard();
 }
 
-function betUpdate(id) {
+const betUpdate = (id) => {
   // Get elements
   const name = document.querySelector("#name").value;
   const sum = document.querySelector("#sum").value;
@@ -410,8 +410,7 @@ function betUpdate(id) {
     name: name,
     date: new Date().getTime() / 1000,
     sum: sum,
-    win: win,
-    archived: false
+    win: win
   };
 
   // Sync
@@ -426,7 +425,7 @@ function betUpdate(id) {
   //   totalCard();
 }
 
-function betRemove(id) {
+const betRemove = (id) => {
   const dbRefObject = firebase.database().ref(`bets/${id}`);
   dbRefObject
     .remove()
@@ -451,8 +450,8 @@ function betRemoveCard(id) {
                        <p id="bet-remove-text">Är du säker på att du vill ta bort spelet?</p>
                     </div>
                     <div class="card-actions">
-                      <a href="#"><i class="material-icons card-action-icon" onclick="addBetCardExit()">arrow_back</i></a>
-                      <a href="#"><i class="material-icons card-action-icon" onclick="betRemove('${id}'); addBetCardExit()">
+                      <a href="#"><i class="material-icons card-action-icon" onclick="spelkollen.addBetCardExit()">arrow_back</i></a>
+                      <a href="#"><i class="material-icons card-action-icon" onclick="spelkollen.betRemove('${id}'); spelkollen.addBetCardExit()">
                       check
                       </i></a>
                   </div>
@@ -468,10 +467,10 @@ function renderApp() {
   renderBetCard();
   userCard();
   totalCard();
-  // getResults();
-  // janResults();
-  // febResults();
-  // marchResults();
+  getResults();
+  janResults();
+  febResults();
+  marchResults();
 }
 
 function getResults() {
@@ -489,8 +488,8 @@ function janResults() {
   // let janWin = betsJan.filter(item => item.win);
   // let janSum = betsJan.map(item => item.sum);
 
-  janTotWin = betsJan.reduce((acc, item) => acc + item.win, 0);
-  janTotSum = betsJan.reduce((acc, item) => acc + item.sum, 0);
+  let janTotWin = betsJan.reduce((acc, item) => acc + item.win, 0);
+  let janTotSum = betsJan.reduce((acc, item) => acc + item.sum, 0);
 
   console.log(betsJan, janTotWin, janTotSum);
 }
@@ -502,8 +501,8 @@ function febResults() {
     item.date < toTimestamp("02/28/2019 23:59:59")
   );
 
-  febTotWin = betsFeb.reduce((acc, item) => acc + item.win, 0);
-  febTotSum = betsFeb.reduce((acc, item) => acc + item.sum, 0);
+  let febTotWin = betsFeb.reduce((acc, item) => acc + item.win, 0);
+  let febTotSum = betsFeb.reduce((acc, item) => acc + item.sum, 0);
 
   console.log(betsFeb, febTotWin, febTotSum);
 }
@@ -525,6 +524,20 @@ function toTimestamp(firstDate, secondDate) {
   const dateTwo = Date.parse(secondDate);
   return dateOne / 1000;
 }
+
+
+window.spelkollen = {};
+
+window.spelkollen.googleLogin = googleLogin;
+window.spelkollen.facebookLogin = facebookLogin;
+window.spelkollen.addButton = addButton;
+window.spelkollen.betAdd = betAdd;
+window.spelkollen.addBetCardExit = addBetCardExit;
+window.spelkollen.archiveBet = archiveBet;
+window.spelkollen.editCard = editCard;
+window.spelkollen.betRemoveCard = betRemoveCard;
+window.spelkollen.betRemove = betRemove;
+window.spelkollen.betUpdate = betUpdate;
 
 // Get localstorage and push it to firebase database
 // const oldBets = JSON.parse(localStorage.getItem("bets"));
