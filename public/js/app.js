@@ -256,7 +256,7 @@ function totalCard() {
             </div>
         </div>
         `;
-  document.querySelector("#stats").innerHTML += li.innerHTML;
+  document.querySelector("#stats-group").innerHTML = li.innerHTML;
 }
 
 function userCard() {
@@ -288,25 +288,26 @@ function userCard() {
             </div>
         </div>
         `;
-  document.querySelector("#stats").innerHTML += li.innerHTML;
+  document.querySelector("#stats-user").innerHTML = li.innerHTML;
 }
 
 function displayCharts() {
+  let data = [janResults(), febResults(), marchResults()];
   var ctx = document.getElementById("myChart").getContext("2d");
   var myChart = new Chart(ctx, {
     type: "bar",
     data: {
       labels: ["Jan", "Feb", "Mar"],
       datasets: [{
-          label: "Omsättning",
-          data: [14877, 14334, 13419],
+          label: "Vinst",
+          data: [data[0].janTotWin, data[1].febTotWin, data[2].marchTotWin],
           backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)", "rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)", "rgba(255, 99, 132, 1)"],
           borderWidth: 1
         },
         {
-          label: "Vinst",
-          data: [2735, 12986, 30811],
+          label: "Omsättning",
+          data: [data[0].janTotSum, data[1].febTotSum, data[2].marchTotSum],
           backgroundColor: ["rgba(255, 199, 132, 0.2)", "rgba(255, 199, 132, 0.2)", "rgba(255, 199, 132, 0.2)"],
           borderColor: ["rgba(255, 199, 132, 1)", "rgba(255, 199, 132, 1)", "rgba(255, 199, 132, 1)"],
           borderWidth: 1
@@ -485,13 +486,14 @@ function janResults() {
     item => item.date < toTimestamp("01/31/2019 23:59:59")
   );
 
-  // let janWin = betsJan.filter(item => item.win);
-  // let janSum = betsJan.map(item => item.sum);
-
   let janTotWin = betsJan.reduce((acc, item) => acc + item.win, 0);
   let janTotSum = betsJan.reduce((acc, item) => acc + item.sum, 0);
 
   console.log(betsJan, janTotWin, janTotSum);
+  return {
+    janTotWin: janTotWin,
+    janTotSum: janTotSum
+  };
 }
 
 function febResults() {
@@ -505,6 +507,10 @@ function febResults() {
   let febTotSum = betsFeb.reduce((acc, item) => acc + item.sum, 0);
 
   console.log(betsFeb, febTotWin, febTotSum);
+  return {
+    febTotWin: febTotWin,
+    febTotSum: febTotSum
+  };
 }
 
 function marchResults() {
@@ -517,6 +523,10 @@ function marchResults() {
   let marchTotSum = betsMarch.reduce((acc, item) => acc + item.sum, 0);
 
   console.log(betsMarch, marchTotWin, marchTotSum);
+  return {
+    marchTotWin: marchTotWin,
+    marchTotSum: marchTotSum
+  };
 }
 
 function toTimestamp(firstDate, secondDate) {

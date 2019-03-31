@@ -17,7 +17,7 @@
     <div class="page" id="page-login">
         <div class="container">
             <div class="item">
-                <div class="facebook" onclick="facebookLogin()">
+                <div class="facebook" onclick="spelkollen.facebookLogin()">
                     <?xml version="1.0" encoding="utf-8"?>
                     <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
                     <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="item">
-                <div class="google" onclick="googleLogin()">
+                <div class="google" onclick="spelkollen.googleLogin()">
                     <svg class="google-logo" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
                         <defs>
@@ -71,7 +71,11 @@
                     <img class="userPhoto circle" src="">
                     <!-- <span class="name">User name</span> -->
                 </div>
-                <div id="stats"></div>
+
+                <div id="stats">
+                    <div id="stats-user"></div>
+                    <div id="stats-group"></div>
+                </div>
                 <div class="card">
                     <canvas id="myChart" width="400" height="400"></canvas>
                 </div>
@@ -90,7 +94,7 @@
             <!-- ACTIVE -->
             <div id="active">
                 <!-- ACTION BUTTON-->
-                <a class="btn-floating btn-large waves-effect waves-light button-add z-depth-3 "
+                <a class="btn-floating btn-large waves-effect waves-light button-add z-depth-3 pulse"
                     onclick="spelkollen.addButton()"><i class="material-icons">add</i></a>
 
                 <!-- CARD -->
