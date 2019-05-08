@@ -1,10 +1,10 @@
 {
-    "name": "Food Ninja",
-    "short_name": "FoodNinja",
+    "name": "Spelkollen",
+    "short_name": "Spelkollen",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#FFE9D2",
-    "theme_color": "#FFE1C4",
+    "background_color": "#00befa",
+    "theme_color": "#00befa",
     "orientation": "portrait-primary",
     "icons": [
 
