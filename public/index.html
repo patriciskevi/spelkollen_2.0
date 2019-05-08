@@ -1,147 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="/manifest.json" />
     <title>Spelkollen</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="page" id="page-login">
-        <div class="container">
-            <div class="item">
-                <div class="facebook" onclick="spelkollen.facebookLogin()">
-                    <?xml version="1.0" encoding="utf-8"?>
-                    <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
-                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                    <svg class="facebook-logo" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1000 1000"
-                        enable-background="new 0 0 1000 1000" xml:space="preserve">
-                        <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
-                        <g>
-                            <g>
-                                <path
-                                    d="M772.2,180.4H616.7c-18.4,0-38.9,24.2-38.9,56.5v112.3h194.4v160.1H577.8V990H394.2V509.3H227.8V349.2h166.4V255c0-135.1,93.8-245,222.5-245h155.5V180.4z" />
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-            </div>
-            <div class="item">
-                <div class="google" onclick="spelkollen.googleLogin()">
-                    <svg class="google-logo" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
-                        <defs>
-                            <path id="a"
-                                d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z" />
-                        </defs>
-                        <clipPath id="b">
-                            <use xlink:href="#a" overflow="visible" />
-                        </clipPath>
-                        <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
-                        <path clip-path="url(#b)" fill="#EA4335" d="M0 11l17 13 7-6.1L48 14V0H0z" />
-                        <path clip-path="url(#b)" fill="#34A853" d="M0 37l30-23 7.9 1L48 0v48H0z" />
-                        <path clip-path="url(#b)" fill="#4285F4" d="M48 48L17 24l-4-3 35-10z" />
-                    </svg>
-                </div>
-            </div>
+      <div class="container">
+        <div class="item">
+          <div class="facebook" onclick="spelkollen.facebookLogin()">
+            <?xml version="1.0" encoding="utf-8"?>
+            <!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+            <svg
+              class="facebook-logo"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 1000 1000"
+              enable-background="new 0 0 1000 1000"
+              xml:space="preserve"
+            >
+              <metadata>
+                Svg Vector Icons : http://www.onlinewebfonts.com/icon
+              </metadata>
+              <g>
+                <g>
+                  <path
+                    d="M772.2,180.4H616.7c-18.4,0-38.9,24.2-38.9,56.5v112.3h194.4v160.1H577.8V990H394.2V509.3H227.8V349.2h166.4V255c0-135.1,93.8-245,222.5-245h155.5V180.4z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
         </div>
+        <div class="item">
+          <div class="google" onclick="spelkollen.googleLogin()">
+            <svg
+              class="google-logo"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 48 48"
+            >
+              <defs>
+                <path
+                  id="a"
+                  d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
+                />
+              </defs>
+              <clipPath id="b">
+                <use xlink:href="#a" overflow="visible" />
+              </clipPath>
+              <path clip-path="url(#b)" fill="#FBBC05" d="M0 37V11l17 13z" />
+              <path
+                clip-path="url(#b)"
+                fill="#EA4335"
+                d="M0 11l17 13 7-6.1L48 14V0H0z"
+              />
+              <path
+                clip-path="url(#b)"
+                fill="#34A853"
+                d="M0 37l30-23 7.9 1L48 0v48H0z"
+              />
+              <path
+                clip-path="url(#b)"
+                fill="#4285F4"
+                d="M48 48L17 24l-4-3 35-10z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="page" id="page-home">
-        <div class="main">
-            <!-- HEADER NAVBAR -->
-            <!-- <ul id="dropdown1" class="dropdown-content">
+      <div class="main">
+        <!-- HEADER NAVBAR -->
+        <!-- <ul id="dropdown1" class="dropdown-content">
                 <li><a href="#!" onclick="logout()">Logga ut</a></li>
             </ul> -->
-            <div id="slide-out" class="sidenav">
-                <div class="valign-wrapper top-sidenav">
+        <div id="slide-out" class="sidenav">
+          <div class="valign-wrapper top-sidenav">
+            <a href="#" class="sidenav-close"
+              ><i class="material-icons">
+                close
+              </i></a
+            >
+            <!-- <a href="#!" class="logout-btn right" onclick="spelkollen.logout()">Logga ut</a> -->
+          </div>
+          <div class="user-view center">
+            <img class="userPhoto circle" src="" />
+            <!-- <span class="name">User name</span> -->
+          </div>
 
-                    <a href="#" class="sidenav-close"><i class="material-icons">
-                            close
-                        </i></a>
-                    <!-- <a href="#!" class="logout-btn right" onclick="spelkollen.logout()">Logga ut</a> -->
-
-                </div>
-                <div class="user-view center">
-                    <img class="userPhoto circle" src="">
-                    <!-- <span class="name">User name</span> -->
-                </div>
-
-                <div id="stats">
-                    <div id="stats-user"></div>
-                    <div id="stats-group"></div>
-                </div>
-                <div class="card">
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                </div>
-            </div>
-            <div class="navbar-fixed">
-                <nav class="nav-extended header-navbar">
-                    <ul id="nav-mobile" class="tabs valign-wrapper">
-                        <li class="tab"><a class="active" href="#active">Pågående</a></li>
-                        <li class="tab"><a href="#archive">Avslutade</a></li>
-                        <li class="user-photo">
-                            <a class="sidenav-trigger" href="#" data-target="slide-out">
-                                <i class="material-icons">
-                                    person
-                                </i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-
-            <!-- ACTIVE -->
-            <div id="active">
-                <!-- ACTION BUTTON-->
-                <a class="btn-floating btn-large waves-effect waves-light button-add z-depth-3 pulse"
-                    onclick="spelkollen.addButton()"><i class="material-icons">add</i></a>
-
-                <!-- CARD -->
-                <div id="card-bet"></div>
-            </div>
-            <!-- ARCHIVE -->
-            <div id="archive"></div>
-            <!-- FOOTER NAVBAR -->
-            <!-- Dropdown Structure -->
-            <ul id="dropdown2" class="dropdown-content">
-                <li><a href="#!">one</a></li>
-                <li><a href="#!">two</a></li>
-                <li><a href="#!">three</a></li>
-            </ul>
-            <div class="navbar-fixed">
-                <nav class="footer-navbar white">
-                    <div class="nav-wrapper">
-                        <ul id="nav-mobile">
-                            <li>
-                                <a href="#">
-                                    <i class="material-icons">message</i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-trigger" data-target="dropdown2" href="#">
-                                    <i class="material-icons">more_horiz</i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-
-
-
-
-            <!-- STATS -->
-            <!-- <div id="stats"></div> -->
+          <div id="stats">
+            <div id="stats-user"></div>
+            <div id="stats-group"></div>
+          </div>
+          <div class="card">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
         </div>
+        <div class="navbar-fixed">
+          <nav class="nav-extended header-navbar">
+            <ul id="nav-mobile" class="tabs valign-wrapper">
+              <li class="tab"><a class="active" href="#active">Pågående</a></li>
+              <li class="tab"><a href="#archive">Avslutade</a></li>
+              <li class="user-photo">
+                <a class="sidenav-trigger" href="#" data-target="slide-out">
+                  <i class="material-icons">
+                    person
+                  </i>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- ACTIVE -->
+        <div id="active">
+          <!-- ACTION BUTTON-->
+          <a
+            class="btn-floating btn-large waves-effect waves-light button-add z-depth-3 pulse"
+            onclick="spelkollen.addButton()"
+            ><i class="material-icons">add</i></a
+          >
+
+          <!-- CARD -->
+          <div id="card-bet"></div>
+        </div>
+        <!-- ARCHIVE -->
+        <div id="archive"></div>
+        <!-- FOOTER NAVBAR -->
+        <!-- Dropdown Structure -->
+        <ul id="dropdown2" class="dropdown-content">
+          <li><a href="#!">one</a></li>
+          <li><a href="#!">two</a></li>
+          <li><a href="#!">three</a></li>
+        </ul>
+        <div class="navbar-fixed">
+          <nav class="footer-navbar white">
+            <div class="nav-wrapper">
+              <ul id="nav-mobile">
+                <li>
+                  <a href="#">
+                    <i class="material-icons">message</i>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-trigger" data-target="dropdown2" href="#">
+                    <i class="material-icons">more_horiz</i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <!-- STATS -->
+        <!-- <div id="stats"></div> -->
+      </div>
     </div>
     <!-- Overlays -->
     <div class="add-bet-card"></div>
@@ -152,19 +190,16 @@
     <script src="js/app.js?w123"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var elems = document.querySelectorAll('.sidenav');
-            var instance = M.Sidenav.init(elems, {
-                edge: 'right',
-                draggable: true
-            });
+      document.addEventListener("DOMContentLoaded", function() {
+        var elems = document.querySelectorAll(".sidenav");
+        var instance = M.Sidenav.init(elems, {
+          edge: "right",
+          draggable: true
         });
+      });
 
-        var instance = M.Sidenav.getInstance(document.querySelector('.tabs'));
-        var instance = M.Tabs.init(document.querySelector('.tabs'), {});
+      var instance = M.Sidenav.getInstance(document.querySelector(".tabs"));
+      var instance = M.Tabs.init(document.querySelector(".tabs"), {});
     </script>
-
-
-</body>
-
+  </body>
 </html>
